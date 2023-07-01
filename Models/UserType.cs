@@ -12,9 +12,9 @@ namespace DBSchoolManagementSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Subject
+    public partial class UserType
     {
-        public int SubjectId { get; set; }
-        public string SubjectName { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
     }
 }
