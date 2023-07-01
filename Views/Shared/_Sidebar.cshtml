@@ -1,0 +1,108 @@
+﻿<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Home/Index">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-fw fa-school"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">SMS </div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+   
+    <li class="nav-item active">
+        <a class="nav-link" href="~/Home/Index">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudent"
+           aria-expanded="true" aria-controls="collapseStudent">
+            <i class="fas fa-fw fa-user-graduate"></i>
+            <span>Students</span>
+        </a>
+        <div id="collapseStudent" class="collapse" aria-labelledby="headingStudent" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Student Details:</h6>
+                <a class="collapse-item" href="~/Student/Index">StudentList</a>
+                <a class="collapse-item" href="~/Student/Create">Create Student</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstructor"
+           aria-expanded="true" aria-controls="collapseInstructor">
+            <i class="fas fa-fw fa-chalkboard-teacher"></i>
+            <span>Instructors</span>
+        </a>
+        <div id="collapseInstructor" class="collapse" aria-labelledby="headingInstructor" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Instructor Details:</h6>
+                <a class="collapse-item" href="~/Instructor/Index">InstructorList</a>
+                <a class="collapse-item" href="~/Instructor/Create">Create Instructor</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartment"
+           aria-expanded="true" aria-controls="collapseDepartment">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Department</span>
+        </a>
+        <div id="collapseDepartment" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Department Details:</h6>
+                <a class="collapse-item" href="~/Department/Index">DepartmentList</a>
+                <a class="collapse-item" href="~/Department/Create">Create Department</a>
+
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourse"
+           aria-expanded="true" aria-controls="collapseCourse">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Courses</span>
+        </a>
+        <div id="collapseCourse" class="collapse" aria-labelledby="headingCourse"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Course Details:</h6>
+                <a class="collapse-item" href="~/Course/Index">CourseList</a>
+                <a class="collapse-item" href="~/Course/Create">Create Course</a>
+
+            </div>
+        </div>
+    </li>
+
+
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+   
+
+</ul>

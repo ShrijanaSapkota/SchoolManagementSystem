@@ -1,0 +1,126 @@
+﻿@model DBSchoolManagementSystem.Controllers.Student
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Student</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<h4 class="text-success">@TempData["msg"]</h4>
+
+<table class=" table">
+    <tr>
+        <th>Student Id </th>
+        <th>FullName</th>
+        <th>Address </th>
+        <th>Email </th>
+        <th>Contactno </th>
+        <th>Gender </th>
+        <th>Studentimg</th>
+        <th>EnrollmentDate </th>
+        <th>Programme </th>
+        <th>Action</th>
+
+
+
+
+
+    </tr>
+
+    @foreach (var item in Model.StudentList)
+
+    {
+        <tr>
+            <td>
+                @item.StudentId
+            </td>
+
+            <td>
+                @item.FullName
+            </td>
+            <td>
+                @item.Address
+            </td>
+            <td>
+                @item.Email
+            </td>
+
+            <td>
+                @item.Contactno
+            </td>
+
+            <td>
+                @item.Gender
+            </td>
+            <td>
+                <img src="@item.Studentimg" width="80" height="50" />
+            </td>
+
+
+
+            <td>
+                @item.EnrollmentDate
+            </td>
+
+            <td>
+                @CommonUtilities.GetTypeNameFromCourseId(item.TypeId)
+            </td>
+
+
+            
+         
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId },new{ style = "color: blue; margin-right: 5px;" })|
+                @Html.ActionLink("Details", "Details", new { id = item.StudentId },new { style = "color: green; margin-right: 5px;" })|
+                @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }, new { style = "color: red; margin-right: 5px;" })|
+
+            </td>
+        </tr>
+    }
+</table>
+@*<span class="alert alert-heading">SubjectStudent</span>
+<div class="well well-small" id="Add-Item" style="width: 1090px;">
+
+
+    @Html.ActionLink("AddMore", null, new { @id = "btns", @class = "addProductItem btn btn-success btn-sm fa fa-plus" })
+
+    <table class="table-responsive" id="tblotm" style="width: 1020px; margin-left: 0px !important; margin-top: 10px;">
+        <tr>
+
+
+            <td style="width:145px;">Subject Id</td>
+
+
+        </tr>
+
+
+    </table>
+    </div>*@
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+     
+    }
+<style>
+  
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+

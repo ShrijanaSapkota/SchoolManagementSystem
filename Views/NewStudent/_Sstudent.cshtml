@@ -1,0 +1,47 @@
+﻿@model DBSchoolManagementSystem.Models.StudentSubject
+@using DBSchoolManagementSystem.Helpers
+
+
+@using (Html.BeginCollectionItem("StudentSubjectList"))
+{
+    @Html.ValidationSummary(true)
+    <style>
+        #BankIdDiv {
+            width: 150px;
+        }
+
+        .GTypeDiv {
+            width: 200px;
+        }
+    </style>
+
+
+    <div class="row" style="margin-left: 0px; font-size: 11px;">
+        <table>
+            <tr>
+
+                <td>
+                    @Html.DropDownListFor(model => model.SubjectId, CommonUtilities.GetSubjectDD(), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
+
+                </td>
+
+
+
+
+                <td>
+                    <button class="btn row-button btn-warning btn-info btn-sm">X</button>
+                </td>
+
+
+
+            </tr>
+
+
+        </table>
+
+
+    </div>
+
+
+}

@@ -1,0 +1,68 @@
+﻿@model DBSchoolManagementSystem.Controllers.Student
+
+@{
+    ViewBag.Title = "ListStudent";
+}
+
+<h2>ListStudent</h2>
+
+<p>
+    @Html.ActionLink("Save", "SaveStd")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Contactno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </th>*@
+       
+    </tr>
+
+@foreach (var item in Model.StudentVmList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Contactno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeId)
+        </td>*@
+        <td>
+            @Html.ActionLink("Update", "Update", new { id=item.StudentId }) |
+            @Html.ActionLink("DeleteStd", "DeleteStd", new { id=item.StudentId })
+        </td>
+    </tr>
+}
+
+</table>

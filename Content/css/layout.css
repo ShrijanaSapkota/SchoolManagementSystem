@@ -1,0 +1,96 @@
+﻿@charset "UTF-8";
+
+ header
+
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity));
+    height: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar {
+    padding-top: 50px;
+    background-color: #f8f9fa;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 170px;
+    overflow-y: auto;
+}
+
+.profile-image {
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+    .profile-image img {
+        width: 100px; /* Adjust the width and height as needed */
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+
+
+.navbar-nav {
+    margin-top: 20px;
+}
+
+.nav-link {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.content {
+    margin-left: 200px;
+    padding-top: 70px;
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+    padding: 20px;
+}
+
+body {
+    padding-top: 70px;
+  
+    /* Adjust this value to provide enough space for the fixed navbar */
+}
+
+html, body {
+    /*height: 100%;*/
+
+    padding: 30px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+.container {
+    /*max-width: 800px;*/ /* Adjust the maximum width as needed */
+    /*width: 100%;*/
+    padding: 0px 20px;
+   
+}
+
+footer, hr {
+    margin-left: 200px;
+}
+
+

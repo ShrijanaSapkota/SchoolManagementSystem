@@ -1,0 +1,67 @@
+﻿@model DBSchoolManagementSystem.Models.Instructor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Instructor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Office)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Office)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Courses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Courses)
+        </dd>
+
+        <dt>Post:</dt>
+        <dd>
+
+            @Html.DisplayFor(model => model.TypeId)
+
+        </dd>
+        <dt>DepartmentId:</dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentId)
+        </dd>
+        <dt>CourseId:</dt>
+        <dd>
+            @Html.DisplayFor(model => model.CourseId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Instructorid }) |
+    @Html.ActionLink("Back to List", "Index" , new{ style = "color: blue; margin-right: 5px;" })
+</p>

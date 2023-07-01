@@ -1,0 +1,136 @@
+﻿@model DBSchoolManagementSystem.Models.StudentSubject
+
+@{
+    ViewBag.Title = "Add item";
+}
+
+
+<h2>Create</h2>
+<style>
+    .fieldset {
+        position: relative;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+
+        .fieldset h1 {
+            position: absolute;
+            top: 0;
+            font-size: 18px;
+            line-height: 1;
+            margin: -9px 0 0; /* half of font-size */
+            background: #fff;
+            padding: 0 3px;
+            font-weight: 100;
+        }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.StudentId)
+    @Html.HiddenFor(m => m.SSID)
+
+
+    <div class="form-horizontal">
+        <h4>SubjectStudent</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.DropDownListFor(model => model.StudentId, CommonUtilities.GetStudentDD(), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="col-md-10">
+            @Html.LabelFor(model => model.SubjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.DropDownListFor(model => model.SubjectId, CommonUtilities.GetSubjectDD(), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
+
+        </div>
+
+        <span class="alert alert-heading">@*StudentName*@</span>
+        <div class="well well-small" id="Add-Item" style="width: 1090px;">
+
+
+            @Html.ActionLink(" Add more", null, new { @id = "btns", @class = "addProductItem btn btn-success btn-sm fa fa-plus" })
+
+            <table class="table-responsive" id="tblotm" style="width: 1020px; margin-left: 0px !important; margin-top: 10px;">
+                <tr>
+
+
+                    <td style="width:145px;">StudentId</td>
+
+
+                </tr>
+
+
+            </table>
+            @try
+            {
+                foreach (var item in Model.StudentSubjectList)
+                {
+
+                    @Html.Partial("_Sstudent.cshtml", item)
+
+                }
+            }
+            catch { }
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Save
+                </button>
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/StudentMgmt.js"></script>
+    @*<script src="~/Scripts/json.cycle.js"></script>*@
+    @*<script type="text/javascript">
+
+
+            $(document).ready(function () {
+                AddClickEvents();
+
+            });
+
+            $("#Add-Item").on('click', '.row-button', function () {
+                $(this).closest("div.row").remove();
+
+            })
+
+
+        </script>*@
+    <script>
+    $(document).ready(function () {
+        $('#addMoreButton').click(function () {
+            $.ajax({
+                url: '@Url.Action("AddMore", "StudentSubject")',
+                type: 'POST',
+                success: function (result) {
+                    $('#StudentSubjectList').append(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+    </script>
+}
+
+

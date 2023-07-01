@@ -1,0 +1,40 @@
+﻿@model DBSchoolManagementSystem.Models.StudentSubject
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create", "StudentSubject",FormMethod.Post)
+</p>
+<table class="table">
+    <tr>
+        <th>
+           StudentId
+        </th>
+        <th>
+            SubjectId
+        </th>
+        
+    </tr>
+
+    @foreach (var item in Model.StudentSubjectList)
+    {
+        <tr>
+            <td>
+                @item.StudentId)
+            </td>
+            <td>
+                @item.SubjectId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SSID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SSID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SSID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,60 @@
+﻿@model DBSchoolManagementSystem.Models.Instructor
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Instructor</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+        
+ <table class="table"> 
+     <tr>
+         <th>Instructor Id</th>
+         <th>First Name</th>
+         <th>Last Name</th>
+         <th>Office</th>
+         <th>Courses</th>
+         <th>Post</th>
+         <th>Department Name</th>
+         <th>Course Name</th>
+         <th>Action</th>
+     </tr>
+
+
+
+    @foreach (var item in Model.InstructorList)
+    {
+        <tr alignstyle="margin:0 auto">
+
+            <td>@item.Instructorid</td>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.Office</td>
+            <td>@item.Courses</td>
+            <td>@CommonUtilities.GetTypeNameFromEmployeeId(item.TypeId)</td>
+            <td>@CommonUtilities.GetDepartmentNameFromDepartmentId(item.DepartmentId)</td>
+            <td>@CommonUtilities.GetCourseNameFromCourseId(item.CourseId)</td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Instructorid }, new { style = "color: blue; margin-right: 5px;" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Instructorid }, new { style = "color: green; margin-right: 5px;" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Instructorid }, new { style = "color: red; margin-right: 5px;" })
+            </td>
+        </tr>
+    }
+    </table>
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

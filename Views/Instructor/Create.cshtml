@@ -1,0 +1,144 @@
+﻿@model DBSchoolManagementSystem.Models.Instructor
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <div class="instructor-form">
+        <h4>Instructor</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Office, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Office, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Office, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Courses, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Courses, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Courses, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.LabelFor(model => model.TypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                @Html.DropDownListFor(model => model.TypeId, CommonUtilities.GetEmployeeTypeDD(), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TypeId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 col-sm-4 form-group">
+            <label>Department</label>
+            @Html.DropDownListFor(m => m.DepartmentId, CommonUtilities.GetDepartmentDD(), new { @class = "form-control form-control-sm", @onchange = "GetCourseListDD()", @required = "required", @id = "dll_DepartmentId" })
+        </div>
+
+
+        @*<div class="col-md-4 col-sm-4 form-group">
+            <label>Course</label>
+            @Html.DropDownListFor(m => m.CourseId, CommonUtilities.GetCourseDD(), new { @class = "form-control form-control-sm", @required = "required", @id = "dll_Course" })
+        </div>*@
+        <div class="col-md-4 col-sm-4 form-group">
+            <label>Course</label>
+            @Html.DropDownListFor(m => m.CourseId, CommonUtilities.GetCourseTypeDefaultDD(), new { @class = "form-control form-control-sm", @required = "required", @id = "dll_Course" })
+        </div>
+
+
+
+
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+        <script type="text/javascript">
+
+    function GetCourseListDD() {
+        var value = $("#dll_DepartmentId option:selected").val();
+        $.ajax({
+
+            url: "@Url.Action("GetCourseByDepartmentIdDD", "Helpers", new { @area = "" })",
+            data: { id: value },
+            dataType: "json",
+            type: "POST",
+            error: function () {
+                alert("An error occurred.");
+            },
+            success: function (data) {
+                var items = "";
+                $.each(data, function (i, item) {
+                    items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
+                });
+
+                $("#dll_Course").html(items);
+            }
+        })
+    };
+        </script>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+}
+<style>
+    .instructor-form {
+        /*background-color: white;
+        color: black;*/
+        max-width: 500px;
+        max-height: 730px;
+        margin: 0 auto;
+        padding: 20px 20px 20px 80px;
+        border: 3px solid #ccc;
+        border-radius: 5px;
+        align-content: center;
+    }
+
+    .btn {
+        background-color: blue;
+        color: white;
+    }
+</style>
+

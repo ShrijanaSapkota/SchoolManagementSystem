@@ -1,0 +1,215 @@
+﻿@using DBSchoolManagementSystem.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+
+<h2>@ViewBag.Title</h2>
+<br>
+<div class="login-form">
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+                    <h4>BHAKTAPUR MULTIPLE CAMPUS</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })<br><br>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })<br><br>
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Log in" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Register as a new user", "Register")
+                    </p>
+
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>
+                }
+            </section>
+        </div>
+        @*<div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>*@
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+
+
+
+    .login-form {
+        width: 382px;
+        overflow: hidden;
+        margin: auto;
+        color: black;
+        margin: 20 0 0 450px;
+        padding: 80px;
+        background: white;
+        border-radius: 15px;
+        border:
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type=password]
+    /*textarea*/ {
+        width: 100%;
+        padding: 8px;
+        border: 2px solid #ccc;
+        color: dimgrey;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        padding: 8px;
+        border: 2px solid #ccc;
+        color: white;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+
+    .login-form h4 {
+        text-align: center;
+    }
+
+    .login-form hr {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .login-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .login-form form {
+        /* width: 200px;
+        margin: 0 auto;
+        border: 1px solid #ccc;*/
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+    }
+
+    .login-form h4 {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+
+
+    .login-form .form-control {
+        padding-right: 20px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn {
+        background-color: blue;
+        color: white;
+    }
+
+    .login-form .btn-default {
+        width: 100%;
+    }
+</style>
+@*<style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            height:30px;
+            /*padding: 12px 20px;*/
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .login-form {
+            display: flex;
+            justify-content: center;
+            border: 3px solid #f1f1f1;
+            align-items: center;
+            height: 100vh;
+        }
+
+            .login-form h2 {
+                text-align: center;
+            }
+
+            .login-form form {
+                width: 200px;
+                margin: 0 auto;
+            }
+
+            .login-form .form-group {
+                margin-bottom: 20px;
+            }
+
+            .login-form .control-label {
+                font-weight: bold;
+            }
+
+            .login-form .text-danger {
+                color: red;
+            }
+
+            .login-form .checkbox {
+                margin-top: 10px;
+            }
+
+            .login-form .btn-default {
+                width: 100%;
+            }
+
+            .login-form p {
+                text-align: center;
+            }
+    </style>*@
+

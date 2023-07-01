@@ -1,0 +1,46 @@
+﻿@model DBSchoolManagementSystem.Models.Course
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Courses</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class=" table">
+    <tr>
+        <th>Course Id </th>
+        <th>CourseName</th>
+        <th>Action</th>
+      
+        
+
+
+
+    </tr>
+
+    @foreach (var item in Model.CourseList)
+
+    {
+        <tr>
+            <td>
+                @item.Courseid
+            </td>
+
+            <td>
+                @item.CourseName
+            </td>
+
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Courseid }, new { style = "color: blue; margin-right: 5px;" })|
+                @Html.ActionLink("Details", "Details", new { id = item.Courseid }, new { style = "color: green; margin-right: 5px;" })|
+                @Html.ActionLink("Delete", "Delete", new { id = item.Courseid }, new { style = "color: red; margin-right: 5px;" })|
+            </td>
+        </tr>
+    }
+</table>
