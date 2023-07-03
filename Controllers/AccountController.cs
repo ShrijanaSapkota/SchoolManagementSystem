@@ -9,19 +9,21 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DBSchoolManagementSystem.Models;
+using DBSchoolManagementSystem;
 
 namespace DBSchoolManagementSystem.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        
 
+        public AccountController()
+        {
+        }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -33,9 +35,9 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -53,63 +55,14 @@ namespace DBSchoolManagementSystem.Controllers
 
         //
         // GET: /Account/Login
-      
-        //public ActionResult Login(string returnUrl)
-        //{
-        //    ViewBag.ReturnUrl = returnUrl;
-        //    return View();
-        //}
-
-        ////
-        //// POST: /Account/Login
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-
-        //    // This doesn't count login failures towards account lockout
-        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
-        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-        //    switch (result)
-        //    {
-        //        case SignInStatus.Success:
-        //            var user = UserManager.FindByName(model.Email);
-
-        //            // Check the condition based on the user's UserId and redirect accordingly
-        //            if (user.UserId == 1)
-        //            {
-        //                return RedirectToAction("Index", "Instructors");
-        //            }
-        //            else if (user.UserId == 2)
-        //            {
-        //                return RedirectToAction("Index", "Home");
-        //            }
-
-        //            return RedirectToAction("Index", "Home");
-
-
-        //        case SignInStatus.LockedOut:
-        //            return View("Lockout");
-        //        case SignInStatus.RequiresVerification:
-        //            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-        //        case SignInStatus.Failure:
-        //        default:
-        //            ModelState.AddModelError("", "Invalid login attempt.");
-        //            return View(model);
-        //    }
-        //}
-        [Authorize(Roles="Admin")]
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
+        //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -120,13 +73,15 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 return View(model);
             }
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = UserManager.FindByName(model.Email); 
                     return RedirectToLocal(returnUrl);
-
-                // Check the condition based on the user's UserId and redirect accordingly
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -136,45 +91,6 @@ namespace DBSchoolManagementSystem.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
-                //Perform user login
-            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //if (result == SignInStatus.Success)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-                //ModelState.AddModelError("", "Invalid login attempt.");
-                //return View(model);
-        }
-
-            // GET: /Account/AdminLogin
-            [AllowAnonymous]
-        public ActionResult AdminLogin(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
-        // POST: /Account/AdminLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AdminLogin(LoginViewModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // Perform admin login
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            if (result == SignInStatus.Success)
-            {
-                return RedirectToAction("Index", "Admin");
-            }
-
-            ModelState.AddModelError("", "Invalid login attempt.");
-            return View(model);
         }
 
         //
@@ -206,7 +122,7 @@ namespace DBSchoolManagementSystem.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -224,7 +140,7 @@ namespace DBSchoolManagementSystem.Controllers
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
-        { 
+        {
             return View();
         }
 
@@ -237,12 +153,12 @@ namespace DBSchoolManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,UserId=model.UserId };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -251,8 +167,6 @@ namespace DBSchoolManagementSystem.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-     
-                      
                 AddErrors(result);
             }
 
@@ -480,7 +394,7 @@ namespace DBSchoolManagementSystem.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Account", "Login");
+            return RedirectToAction("Index", "Home");
         }
 
         //

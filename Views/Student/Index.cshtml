@@ -1,5 +1,4 @@
-﻿@model DBSchoolManagementSystem.Controllers.Student
-
+﻿@model DBSchoolManagementSystem.Models.Student
 
 @{
     ViewBag.Title = "Index";
@@ -72,12 +71,12 @@
             </td>
 
 
-            
-         
+
+
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId },new{ style = "color: blue; margin-right: 5px;" })|
-                @Html.ActionLink("Details", "Details", new { id = item.StudentId },new { style = "color: green; margin-right: 5px;" })|
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }, new { style = "color: blue; margin-right: 5px;" })|
+                @Html.ActionLink("Details", "Details", new { id = item.StudentId }, new { style = "color: green; margin-right: 5px;" })|
                 @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }, new { style = "color: red; margin-right: 5px;" })|
 
             </td>
@@ -85,31 +84,30 @@
     }
 </table>
 @*<span class="alert alert-heading">SubjectStudent</span>
-<div class="well well-small" id="Add-Item" style="width: 1090px;">
+    <div class="well well-small" id="Add-Item" style="width: 1090px;">
 
 
-    @Html.ActionLink("AddMore", null, new { @id = "btns", @class = "addProductItem btn btn-success btn-sm fa fa-plus" })
+        @Html.ActionLink("AddMore", null, new { @id = "btns", @class = "addProductItem btn btn-success btn-sm fa fa-plus" })
 
-    <table class="table-responsive" id="tblotm" style="width: 1020px; margin-left: 0px !important; margin-top: 10px;">
-        <tr>
-
-
-            <td style="width:145px;">Subject Id</td>
+        <table class="table-responsive" id="tblotm" style="width: 1020px; margin-left: 0px !important; margin-top: 10px;">
+            <tr>
 
 
-        </tr>
+                <td style="width:145px;">Subject Id</td>
 
 
-    </table>
-    </div>*@
+            </tr>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
 
-     
-    }
+        </table>
+        </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
 <style>
-  
 </style>
 
 

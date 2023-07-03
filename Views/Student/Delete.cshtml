@@ -1,4 +1,4 @@
-﻿@model DBSchoolManagementSystem.Controllers.Student
+﻿@model DBSchoolManagementSystem.Models.Student
 
 @{
     ViewBag.Title = "Delete";
@@ -64,7 +64,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -74,8 +75,8 @@
     }
 </div>
 <style>
-    .btn{
-        background-color:red;
-        color:white;
+    .btn {
+        background-color: red;
+        color: white;
     }
 </style>

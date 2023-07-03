@@ -25,9 +25,9 @@ namespace DBSchoolManagementSystem.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            
         }
 
-        //public System.Data.Entity.DbSet<DBSchoolManagementSystem.Models.Subject> Subjects { get; set; }
-        //public object SubjectStudent { get; internal set; }
+
     }
 }

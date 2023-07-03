@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 
 namespace DBSchoolManagementSystem.Controllers
@@ -58,7 +59,7 @@ namespace DBSchoolManagementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Student model, HttpPostedFileBase ImageFile)
+        public ActionResult Create(Student model)
         {
 
             if (model.ImageFile != null && model.ImageFile.ContentLength > 0)

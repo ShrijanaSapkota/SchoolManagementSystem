@@ -48,21 +48,21 @@ namespace DBSchoolManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Student model,HttpPostedFileBase ImageFile)
         {
-            
-                if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
-                {
-                    string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
-                    string extension = Path.GetExtension(model.ImageFile.FileName);
-                    fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
-                    model.Studentimg = "../Image/" + fileName;
-                    fileName = Path.Combine(Server.MapPath("~/Image"), fileName);
-                    model.ImageFile.SaveAs(fileName);
-                }
+
+            if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                string extension = Path.GetExtension(model.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
+                model.Studentimg = "../Image/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Image"), fileName);
+                model.ImageFile.SaveAs(fileName);
+            }
 
 
 
 
-                    using (SchoolManagement db = new SchoolManagement())
+            using (SchoolManagement db = new SchoolManagement())
                     {
                         if (db.Student.Any(x => x.FullName == model.FullName))
                         {
@@ -110,14 +110,14 @@ namespace DBSchoolManagementSystem.Controllers
                     fileName = Path.Combine(Server.MapPath("~/Image"), fileName);
                     //model.ImageFile.SaveAs(fileName);
                     //return RedirectToAction("Index");
-                    if(model.ImageFile.ContentLength<1000000)
+                    if (model.ImageFile.ContentLength < 1000000)
                     {
                         db.Entry(model).State = EntityState.Modified;
                         if (db.SaveChanges() > 0)
                         {
                             model.ImageFile.SaveAs(fileName);
                         }
-                        
+
                         return RedirectToAction("Index");
                     }
                     else
@@ -126,7 +126,7 @@ namespace DBSchoolManagementSystem.Controllers
                     }
 
                 }
-                
+
             }
             else
             {
