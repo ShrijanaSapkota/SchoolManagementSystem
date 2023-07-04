@@ -35,7 +35,7 @@ namespace DBSchoolManagementSystem.Controllers
 
             return View(model);
         }
-      
+       
         public ActionResult Create()
         {
             

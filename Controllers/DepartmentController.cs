@@ -14,7 +14,7 @@ namespace DBSchoolManagementSystem.Controllers
     {
         SchoolManagement db = new SchoolManagement();
 
-      
+        
         public ActionResult Index()
         {
             Department model = new Department();

@@ -6,13 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using static DBSchoolManagementSystem.Models.Instructor;
+
 
 namespace DBSchoolManagementSystem.Controllers
 {
     public class InstructorController : Controller
     {
         SchoolManagement db =new SchoolManagement();
-       public ActionResult Index()
+        
+        public ActionResult Index()
         {
             Instructor model = new Instructor();
             model.InstructorList = new List<Instructor>();
@@ -93,15 +96,7 @@ namespace DBSchoolManagementSystem.Controllers
             }
             return View(model);
         }
-        //[HttpPost]
-        //public ActionResult AddItem(Instructor model)
-        //{
-        //    Instructor model = new Instructor();
-        //    db.Instructor.Add(model);
-        //    db.Instructor.new Instructor();
-
-        //    return RedirectToAction("Index");
-        //}
+     
     }
    
 }

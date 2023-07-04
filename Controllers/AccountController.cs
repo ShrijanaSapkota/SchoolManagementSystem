@@ -157,15 +157,13 @@ namespace DBSchoolManagementSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var myuser = await _userManager.FindByEmailAsync(model.Email);
+                    await _userManager.AddToRoleAsync(myuser.Id, "Student");
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Home", "Index");
                 }
                 AddErrors(result);
             }

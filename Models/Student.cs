@@ -15,7 +15,7 @@ namespace DBSchoolManagementSystem.Models
     {
         [Key]
         public int StudentId { get; set; }
-        [Display(Name = "Full Name")]
+        [Display(Name = "Name")]
         [Required(ErrorMessage = "Student name is required")]
         public string FullName { get; set; }
         public string Address { get; set; }
@@ -32,6 +32,7 @@ namespace DBSchoolManagementSystem.Models
         public int? TypeId { get; set; }
 
         public string Studentimg { get; set; }
+
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; }
         //[NotMapped]
@@ -44,7 +45,9 @@ namespace DBSchoolManagementSystem.Models
         public List<StudentVm> StudentVmList { get;  set; }
         [NotMapped]
         public List<StudentSubject> StudentSubjectList { get; set; }
-        public List<Vm> VmList { get; internal set; }
+        public List<Vm> VmList { get;  set; }
+        
+        
     }
     public class StudentVM
     {

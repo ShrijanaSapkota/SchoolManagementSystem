@@ -1,0 +1,24 @@
+﻿@model DBSchoolManagementSystem.Models.Student
+
+<h2>Mark Attendance</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.StudentId)
+
+    <div>
+        @Html.LabelFor(m => m.FullName)
+        @Html.DisplayFor(m => m.FullName)
+    </div>
+    <div>
+        @Html.Label("Attendance Date")
+        @Html.DisplayFor(m => DateTime.Today)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Attendances[0].IsPresent)
+        @Html.CheckBoxFor(m => m.Attendances[0].IsPresent)
+    </div>
+
+    <input type="submit" value="Mark Attendance" />
+}
+

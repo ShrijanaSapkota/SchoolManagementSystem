@@ -2354,12 +2354,14 @@
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\Account\AdminLogin.cshtml" />
-    <Content Include="Views\user\Index.cshtml" />
+    <Content Include="Views\Instructor\AddMarks.cshtml" />
+    <Content Include="Views\Instructor\MarkAttendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Instructors\Data\" />
     <Folder Include="Areas\Students\Data\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

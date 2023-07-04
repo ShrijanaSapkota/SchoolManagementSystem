@@ -106,4 +106,5 @@ namespace DBSchoolManagementSystem
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+   
 }

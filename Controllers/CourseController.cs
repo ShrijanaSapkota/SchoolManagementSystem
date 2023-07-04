@@ -13,7 +13,8 @@ namespace DBSchoolManagementSystem.Controllers
     {
         // GET: Course
             SchoolManagement db = new SchoolManagement();
-            public ActionResult Index()
+        
+        public ActionResult Index()
             {
                 Course model = new Course();
                 model.CourseList = new List<Course>();
