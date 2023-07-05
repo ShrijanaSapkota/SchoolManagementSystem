@@ -199,6 +199,9 @@
     </Compile>
     <Compile Include="Helpers\HtmlModelBindingHelperExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs" />
+    <Compile Include="Models\LeaveNote.cs" />
+    <Compile Include="Models\LeaveNoteViewModel.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseType.cs" />
     <Compile Include="Models\Department.cs" />
@@ -2354,8 +2357,8 @@
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\Account\AdminLogin.cshtml" />
-    <Content Include="Views\Instructor\AddMarks.cshtml" />
-    <Content Include="Views\Instructor\MarkAttendance.cshtml" />
+    <Content Include="Views\Student\SubmitLeaveNote.cshtml" />
+    <Content Include="Views\Instructor\ViewLeaveNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

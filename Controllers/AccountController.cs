@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DBSchoolManagementSystem.Models;
 using DBSchoolManagementSystem;
+using DBSchoolManagementSystem.Services;
+using System.Collections.Generic;
 
 namespace DBSchoolManagementSystem.Controllers
 {
@@ -136,11 +138,18 @@ namespace DBSchoolManagementSystem.Controllers
             }
         }
 
+        
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
+            StudentServices _SS = new StudentServices();
+            AspNetRoles model = new AspNetRoles();
+            model.AspNetRolesList = new List<AspNetRoles>();
+            model.AspNetRolesList = _SS.GetAspNetRolesList();
+            ViewBag.Roles = new SelectList(model.AspNetRolesList, "Name", "Name");
             return View();
         }
 
@@ -157,13 +166,13 @@ namespace DBSchoolManagementSystem.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var myuser = await _userManager.FindByEmailAsync(model.Email);
-                    await _userManager.AddToRoleAsync(myuser.Id, "Student");
+                    var myuser = await UserManager.FindByEmailAsync(model.Email);
+                    await UserManager.AddToRoleAsync(myuser.Id, model.RoleId);
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    
 
-                    return RedirectToAction("Home", "Index");
+
+                    return RedirectToAction("Login","Account");
                 }
                 AddErrors(result);
             }

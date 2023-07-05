@@ -9,6 +9,8 @@ namespace DBSchoolManagementSystem.Models
 {
     public class Instructor
     {
+        
+       
         [Key]
         public int Instructorid { get; set; }
         public string FirstName { get; set; }
@@ -18,7 +20,9 @@ namespace DBSchoolManagementSystem.Models
         public int? TypeId { get; set; }
         public int? DepartmentId { get; set; }
         public int? Courseid { get; set; }
-        
+        [NotMapped]
+        public int Id { get; set; }
+
 
         //public  EmployeeType EmployeeType { get; set; }
         [NotMapped]

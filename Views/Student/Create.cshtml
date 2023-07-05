@@ -49,7 +49,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Studentimg, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-           @Html.TextBoxFor(m => m.ImageFile, new {type="file"})
+            @Html.TextBoxFor(m => m.ImageFile, new { type = "file" })
         </div>
     </div>
 
@@ -78,8 +78,9 @@
             @Html.ValidationMessageFor(model => model.TypeId, "", new { @class = "text-danger" })
         </div>
     </div>
+   
 
-  
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

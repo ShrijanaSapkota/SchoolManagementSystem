@@ -113,6 +113,18 @@ namespace DBSchoolManagementSystem.Services
             } 
         }
 
+        public List<AspNetRoles> GetAspNetRolesList()
+        {
+            using (SchoolManagement db = new SchoolManagement())
+            {
+                List<AspNetRoles> AspNetUserRolesList = new List<AspNetRoles>();
+
+                AspNetUserRolesList = db.Database.SqlQuery<AspNetRoles>("exec ListUserRoles").ToList();
+
+                return AspNetUserRolesList;
+            }
+        }
+
 
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DBSchoolManagementSystem.Models
 {
@@ -81,6 +82,8 @@ namespace DBSchoolManagementSystem.Models
         public string ConfirmPassword { get; set; }
         [Display(Name ="User")]
         public int? UserId { get; set; }
+        [NotMapped]
+        public string RoleId { get; set;}
     }
 
     public class ResetPasswordViewModel

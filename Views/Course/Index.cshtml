@@ -6,10 +6,13 @@
 }
 
 <h2>Courses</h2>
+@if (User.IsInRole("Admin"))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
+}
 <table class=" table">
     <tr>
         <th>Course Id </th>
@@ -35,11 +38,13 @@
             </td>
 
 
-
+           
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Courseid }, new { style = "color: blue; margin-right: 5px;" })|
-                @Html.ActionLink("Details", "Details", new { id = item.Courseid }, new { style = "color: green; margin-right: 5px;" })|
-                @Html.ActionLink("Delete", "Delete", new { id = item.Courseid }, new { style = "color: red; margin-right: 5px;" })|
+                @if (User.IsInRole("Admin")) {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Courseid }, new { style = "color: blue; margin-right: 5px;" })}
+                @Html.ActionLink("Details", "Details", new { id = item.Courseid }, new { style = "color: green; margin-right: 5px;" })
+                @if (User.IsInRole("Admin")) {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Courseid }, new { style = "color: red; margin-right: 5px;" })}
             </td>
         </tr>
     }

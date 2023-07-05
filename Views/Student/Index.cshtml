@@ -5,11 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Student</h2>
-
+@if (User.IsInRole("Admin"))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
+}
 <h4 class="text-success">@TempData["msg"]</h4>
 
 <table class=" table">
@@ -71,13 +73,18 @@
             </td>
 
 
-
+            
 
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }, new { style = "color: blue; margin-right: 5px;" })|
-                @Html.ActionLink("Details", "Details", new { id = item.StudentId }, new { style = "color: green; margin-right: 5px;" })|
-                @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }, new { style = "color: red; margin-right: 5px;" })|
+                @if (User.IsInRole("Admin"))
+                {
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }, new { style = "color: blue; margin-right: 5px;" })}
+                @Html.ActionLink("Details", "Details", new { id = item.StudentId }, new { style = "color: green; margin-right: 5px;" })
+
+                @if (User.IsInRole("Admin"))
+                                {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }, new { style = "color: red; margin-right: 5px;" }) }
 
             </td>
         </tr>

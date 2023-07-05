@@ -2,21 +2,62 @@
 
 using DBSchoolManagementSystem.Models;
 using DBSchoolManagementSystem.Services;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 
 namespace DBSchoolManagementSystem.Controllers
 {
-    //[Authorize]
+    
+
+    [Authorize(Roles ="Admin,Instructor")]
     public class StudentController : Controller
     {
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public StudentController()
+        {
+        }
+
+        public StudentController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         SchoolManagement db = new SchoolManagement();
         public ActionResult Index()
         {
@@ -38,7 +79,8 @@ namespace DBSchoolManagementSystem.Controllers
        
         public ActionResult Create()
         {
-            
+           
+
             return View();
         }
 
@@ -46,38 +88,46 @@ namespace DBSchoolManagementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Student model,HttpPostedFileBase ImageFile)
+        public async Task<ActionResult> Create(Student model,HttpPostedFileBase ImageFile)
         {
-
-            if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await UserManager.CreateAsync(user, "User12345@@");
+            if (result.Succeeded)
             {
-                string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
-                string extension = Path.GetExtension(model.ImageFile.FileName);
-                fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
-                model.Studentimg = "../Image/" + fileName;
-                fileName = Path.Combine(Server.MapPath("~/Image"), fileName);
-                model.ImageFile.SaveAs(fileName);
-            }
+                var myuser = await UserManager.FindByEmailAsync(model.Email);
+                await UserManager.AddToRoleAsync(myuser.Id, "Student");
+
+
+                if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                    string extension = Path.GetExtension(model.ImageFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
+                    model.Studentimg = "../Image/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image"), fileName);
+                    model.ImageFile.SaveAs(fileName);
+                }
 
 
 
 
-            using (SchoolManagement db = new SchoolManagement())
+                using (SchoolManagement db = new SchoolManagement())
+                {
+                    if (db.Student.Any(x => x.FullName == model.FullName))
                     {
-                        if (db.Student.Any(x => x.FullName == model.FullName))
-                        {
-                            ModelState.AddModelError("FullName", "Name Already Exist");
-                        }
-                        if(ModelState.IsValid)
-                        {
-                            db.Student.Add(model);
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
-                        }
+                        ModelState.AddModelError("FullName", "Name Already Exist");
                     }
-                    return View(model);
-                
-            
+                    if (ModelState.IsValid)
+                    {
+                        db.Student.Add(model);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                return View(model);
+
+            }
+            return View();
 
             
         }
@@ -252,8 +302,40 @@ namespace DBSchoolManagementSystem.Controllers
             }
             return View(model);
         }
+        public ActionResult SubmitLeaveNote()
+        {
+            var viewModel = new LeaveNoteViewModel();
+            ViewBag.Instructors = db.Instructor.ToList();
 
-     
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitLeaveNote(LeaveNoteViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var leaveNote = new LeaveNote
+                {
+                    StudentId = viewModel.StudentId,
+                    Instructorid = viewModel.Instructorid,
+                    Note = viewModel.Note,
+                    Date = DateTime.Now
+                };
+
+                db.LeaveNotes.Add(leaveNote);
+                db.SaveChanges();
+
+                return RedirectToAction("Index","Instructor");
+            }
+
+            ViewBag.Instructors = db.Instructor.ToList();
+
+            return View(viewModel);
+        }
+
+
 
     }
 }

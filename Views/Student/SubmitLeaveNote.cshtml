@@ -1,0 +1,24 @@
+﻿
+@model DBSchoolManagementSystem.Models.LeaveNoteViewModel
+
+@using (Html.BeginForm("SubmitLeaveNote", "Student", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Note, "Leave Note:")
+        @Html.TextAreaFor(model => model.Note, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(model => model.Note)
+    </div>
+
+    <input type="hidden" name="StudentId" value="@User.Identity.Name" />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Instructorid, "Instructor:")
+        @Html.DropDownListFor(model => model.Instructorid, new SelectList(ViewBag.Instructors, "Id", "FirstName"), "Select Instructor", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Instructorid)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+

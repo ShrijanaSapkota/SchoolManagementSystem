@@ -11,23 +11,24 @@ using static DBSchoolManagementSystem.Models.Instructor;
 
 namespace DBSchoolManagementSystem.Controllers
 {
+
     public class InstructorController : Controller
     {
-        SchoolManagement db =new SchoolManagement();
-        
+        SchoolManagement db = new SchoolManagement();
+
         public ActionResult Index()
         {
             Instructor model = new Instructor();
             model.InstructorList = new List<Instructor>();
             model.InstructorList = db.Instructor.ToList();
 
-           return View(model);
+            return View(model);
         }
         public ActionResult AddItem()
         {
             return View();
         }
-       
+
         public ActionResult Create()
         {
             return View();
@@ -45,6 +46,7 @@ namespace DBSchoolManagementSystem.Controllers
 
             return View(model);
         }
+
         public ActionResult Edit(int id)
         {
             Instructor model = new Instructor();
@@ -96,7 +98,14 @@ namespace DBSchoolManagementSystem.Controllers
             }
             return View(model);
         }
-     
+
+        public ActionResult ViewLeaveNotes()
+        {
+            // Retrieve all leave notes from the database
+            var leaveNotes = db.LeaveNotes.ToList();
+
+            return View(leaveNotes);
+        }
     }
-   
-}
+
+    }

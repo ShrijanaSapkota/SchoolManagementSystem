@@ -30,8 +30,9 @@ namespace DBSchoolManagementSystem.Models
         public string Course { get; set; }
         [Display(Name = "Course")]
         public int? TypeId { get; set; }
-
+        
         public string Studentimg { get; set; }
+     
 
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; }
