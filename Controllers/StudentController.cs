@@ -19,7 +19,7 @@ namespace DBSchoolManagementSystem.Controllers
 {
     
 
-    [Authorize(Roles ="Admin,Instructor")]
+    
     public class StudentController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -96,6 +96,7 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 var myuser = await UserManager.FindByEmailAsync(model.Email);
                 await UserManager.AddToRoleAsync(myuser.Id, "Student");
+                model.UserId = myuser.Id;
 
 
                 if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
@@ -119,6 +120,7 @@ namespace DBSchoolManagementSystem.Controllers
                     }
                     if (ModelState.IsValid)
                     {
+                       
                         db.Student.Add(model);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -316,9 +318,15 @@ namespace DBSchoolManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var UserId=User.Identity.GetUserId();
+                Student model = new Student();
+                model = db.Student.FirstOrDefault(x=>x.UserId==UserId);
+
                 var leaveNote = new LeaveNote
                 {
-                    StudentId = viewModel.StudentId,
+
+
+                    StudentId = model.StudentId,
                     Instructorid = viewModel.Instructorid,
                     Note = viewModel.Note,
                     Date = DateTime.Now
@@ -327,7 +335,7 @@ namespace DBSchoolManagementSystem.Controllers
                 db.LeaveNotes.Add(leaveNote);
                 db.SaveChanges();
 
-                return RedirectToAction("Index","Instructor");
+                return RedirectToAction("Index");
             }
 
             ViewBag.Instructors = db.Instructor.ToList();

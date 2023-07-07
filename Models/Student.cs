@@ -30,6 +30,7 @@ namespace DBSchoolManagementSystem.Models
         public string Course { get; set; }
         [Display(Name = "Course")]
         public int? TypeId { get; set; }
+        public string UserId { get; set; }
         
         public string Studentimg { get; set; }
      

@@ -15,6 +15,8 @@ namespace DBSchoolManagementSystem.Models
 
         [Required(ErrorMessage = "Please enter the leave note.")]
         public string Note { get; set; }
+        public bool IsApproved { get; set; }
+        public bool IsRejected { get; set; }
 
         public DateTime Date { get; set; }
     }

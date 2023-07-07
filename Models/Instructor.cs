@@ -21,6 +21,8 @@ namespace DBSchoolManagementSystem.Models
         public int? DepartmentId { get; set; }
         public int? Courseid { get; set; }
         [NotMapped]
+        public string RoleId { get; set; }
+        [NotMapped]
         public int Id { get; set; }
 
 

@@ -22,6 +22,26 @@
                 <td>@leaveNote.Instructorid</td>
                 <td>@leaveNote.Note</td>
                 <td>@leaveNote.Date</td>
+                @if (leaveNote.IsApproved == false && leaveNote.IsRejected == false)
+                {
+                    if (User.IsInRole("Admin")||(User.IsInRole("Instructor")))
+                    {
+                <td>@Html.ActionLink("IsApproved", "IsApproved", new { id = leaveNote.Id }, new { style = "color: blue; margin-right: 5px;" })</td>
+                <td>@Html.ActionLink("IsRejected", "IsRejected", new { id = leaveNote.Id }, new { style = "color: blue; margin-right: 5px;" })</td>
+                    }
+                        else
+                        {
+                            <td>Pending</td>
+                        }
+                }
+                else if (leaveNote.IsApproved == true)
+                {
+                        <td>Approved</td>
+                    }
+                    else
+                    {
+                        <td>Rejected</td>
+                    }
             </tr>
         }
     </table>
@@ -30,3 +50,4 @@ else
 {
     <p>No leave notes found.</p>
 }
+

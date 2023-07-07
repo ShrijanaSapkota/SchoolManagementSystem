@@ -1,9 +1,11 @@
 ﻿using DBSchoolManagementSystem.Models;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using static DBSchoolManagementSystem.Models.Instructor;
@@ -14,7 +16,44 @@ namespace DBSchoolManagementSystem.Controllers
 
     public class InstructorController : Controller
     {
-        SchoolManagement db = new SchoolManagement();
+            private ApplicationSignInManager _signInManager;
+            private ApplicationUserManager _userManager;
+
+            public InstructorController()
+            {
+            }
+
+            public InstructorController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+            {
+                UserManager = userManager;
+                SignInManager = signInManager;
+            }
+
+            public ApplicationSignInManager SignInManager
+            {
+                get
+                {
+                    return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                }
+                private set
+                {
+                    _signInManager = value;
+                }
+            }
+
+            public ApplicationUserManager UserManager
+            {
+                get
+                {
+                    return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                }
+                private set
+                {
+                    _userManager = value;
+                }
+            }
+
+            SchoolManagement db = new SchoolManagement();
 
         public ActionResult Index()
         {
@@ -30,21 +69,31 @@ namespace DBSchoolManagementSystem.Controllers
         }
 
         public ActionResult Create()
+
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Instructor model)
+        public async Task<ActionResult> Create(Instructor model)
         {
-            if (ModelState.IsValid)
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await UserManager.CreateAsync(user, "Instructor@12345");
+            if (result.Succeeded)
             {
-                db.Instructor.Add(model);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                var myuser = await UserManager.FindByEmailAsync(model.Email);
+                await UserManager.AddToRoleAsync(myuser.Id, "Instructor");
 
-            return View(model);
+                if (ModelState.IsValid)
+                {
+                    db.Instructor.Add(model);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                return View(model);
+            }
+            return View();
         }
 
         public ActionResult Edit(int id)
@@ -101,11 +150,31 @@ namespace DBSchoolManagementSystem.Controllers
 
         public ActionResult ViewLeaveNotes()
         {
+            
             // Retrieve all leave notes from the database
             var leaveNotes = db.LeaveNotes.ToList();
 
             return View(leaveNotes);
         }
+
+        [HttpGet]
+        public ActionResult IsApproved(int id)
+        {
+            var leaveNotes = db.LeaveNotes.Find(id);
+            leaveNotes.IsApproved = true;
+            db.Entry(leaveNotes).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction(nameof(ViewLeaveNotes));
+        }
+        public ActionResult IsRejected(int id)
+        {
+            var leaveNotes =db.LeaveNotes.Find(id);
+            leaveNotes.IsRejected = true;
+            db.Entry(leaveNotes).State=EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction(nameof(ViewLeaveNotes));
+        }
+            
     }
 
     }
