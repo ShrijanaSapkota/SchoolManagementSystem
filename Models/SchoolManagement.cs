@@ -18,7 +18,12 @@ namespace DBSchoolManagementSystem.Models
         public DbSet<Department> Department { get; set; }
         public DbSet<Subject> Subject { get; set; }
         public DbSet<StudentSubject> StudentSubject{ get; set; }
-        public DbSet<LeaveNote> LeaveNotes { get; set; }
+        public DbSet<leaveNote> LeaveNotes { get; set; }
+        public DbSet<Assignment> Assignment { get; set; }
+        public DbSet<Semester> Semester { get; set; }
+
+        public DbSet<AssignInstructor> AssignInstructor { get; set; }
+
 
         //public object StudentSubjectList { get;  set; }
 
@@ -30,6 +35,6 @@ namespace DBSchoolManagementSystem.Models
             
         }
 
-
+       
     }
 }

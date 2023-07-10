@@ -257,6 +257,8 @@ namespace DBSchoolManagementSystem
         }
 
 
+
+
         //public static string GetSubjectStudentFromStudentId(int? id)
         //{
         //    string TypeName = string.Empty;

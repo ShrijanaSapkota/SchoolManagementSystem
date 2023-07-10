@@ -4,65 +4,53 @@
 }
 
 
-<style>
-    .Contact-form {
-        background-color:white;
-        color:black;
-        max-width: 400px;
-        max-height: 500px;
-        margin: 0 auto;
-        padding: 20px 20px 20px 20px;
-        border: 1px solid #ccc;
-      /*  border-radius: 2px;*/
-        align-content: center;
-    }
-    .form-group {
-        margin-bottom: 20px;
-    }
-    .h2{
-        text-decoration-color:black;
-    }
 
-    label {
-        
-        display: block;
-        font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    textarea {
-        width: 100%;
-        padding: 8px;
-        border: 2px solid #ccc;
-        color:dimgrey;
-        border-radius: 4px;
-        box-sizing: border-box;
-        
-    }
-        textarea[name="message"] {
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            padding: 8px;
-        }
-
-    button[type="submit"] {
-        padding: 8px 16px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-</style>
 
 <div class="Contact-form">
     <h2>Contact Us</h2><br>
-    <form action="@Url.Action("Contact", "Home")" method="post">
+
+     <div class="row">
+        
+         <div class="col-md-12">
+             <div class="col-right">
+                 <article class="articleBox panel-default">
+                     <div class="panel-heading">
+                       
+
+                     </div>
+                     <div class="content">
+                         <div class="leadingContent">
+                             <p></p>
+                             <p>
+                                 <strong>Bhaktapur Multiple Campus,Tribhuwan University</strong>
+                                 <br>
+                                 Dudhpati, Bhaktapur, Nepal
+                             </p>
+                             <p>
+                                 Contact
+                                 <strong>00-977-1-6610200 / 6613199</strong>
+                             </p>
+                             <p>
+                                 Email id:
+                                 <strong>info@bmcbkt.edu.np</strong>
+                             </p>
+                             <p>
+                                 
+                                 Website: www.bmcbkt.edu.np
+                             </p>
+                             <div class="mapouter">
+                                 <div class="gmap_canvas">
+                                     <iframe frameborder="0" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14134.237338759369!2d85.4208909!3d27.6691024!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1aa39515e461%3A0x8a1b8a0147782c1d!2sBhaktapur%20Multiple%20Campus!5e0!3m2!1sen!2snp!4v1688882713551!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </article>
+             </div>
+
+         </div>
+     </div>
+    @*<form action="@Url.Action("Contact", "Home")" method="post">
 
         <div class="form-group">
             <label for="name">Name:</label>
@@ -78,6 +66,6 @@
 
             <button type="submit" class="btn btn-primary">Send Message</button>
         </div>
-    </form>
+    </form>*@
 
 </div>

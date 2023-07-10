@@ -1,4 +1,5 @@
 ﻿using DBSchoolManagementSystem.Models;
+using DBSchoolManagementSystem.Services;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -150,9 +151,15 @@ namespace DBSchoolManagementSystem.Controllers
 
         public ActionResult ViewLeaveNotes()
         {
+            StudentServices _SS = new StudentServices();
             
+            List<leaveNote> leaveNotes = _SS.GetLeaveNoteList();
+          
+            
+
+
             // Retrieve all leave notes from the database
-            var leaveNotes = db.LeaveNotes.ToList();
+            var leaveNote = db.LeaveNotes.ToList();
 
             return View(leaveNotes);
         }

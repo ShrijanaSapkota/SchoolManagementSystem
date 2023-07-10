@@ -182,6 +182,7 @@
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="CommonUtilities.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AssignmentController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DepartmentCourseController.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Helpers\HtmlModelBindingHelperExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs" />
+    <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\LeaveNote.cs" />
     <Compile Include="Models\LeaveNoteViewModel.cs" />
     <Compile Include="Models\Course.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SchoolManagement.cs" />
+    <Compile Include="Models\Semester.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentSubject.cs" />
     <Compile Include="Models\Subject.cs" />
@@ -390,6 +393,7 @@
     <Content Include="Image\logo.jpg" />
     <Content Include="Image\profile.JPG" />
     <Content Include="Image\schoolmgmt.png" />
+    <Compile Include="Models\AssignInstructor.cs" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Students\Views\web.config" />
@@ -2360,6 +2364,9 @@
     <Content Include="Views\Student\SubmitLeaveNote.cshtml" />
     <Content Include="Views\Instructor\ViewLeaveNotes.cshtml" />
     <Content Include="Views\EmailSetup\Index.cshtml" />
+    <Content Include="Views\Assignment\Create.cshtml" />
+    <Content Include="Views\Assignment\Index.cshtml" />
+    <Content Include="Views\Course\AssignInstructor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

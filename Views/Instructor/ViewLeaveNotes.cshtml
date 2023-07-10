@@ -1,4 +1,4 @@
-﻿@model List<DBSchoolManagementSystem.Models.LeaveNote>
+﻿@model List<DBSchoolManagementSystem.Models.leaveNote>
 
 @{
     ViewBag.Title = "View Leave Notes";
@@ -6,20 +6,20 @@
 
 <h2>Leave Notes</h2>
 
-@if (Model.Count > 0)
+@if (Model != null && Model.Count > 0)
 {
     <table class="table">
         <tr>
-            <th>Student ID</th>
-            <th>Instructor ID</th>
+            <th>Student Name</th>
+            <th>Instructor Name</th>
             <th>Note</th>
             <th>Date</th>
         </tr>
         @foreach (var leaveNote in Model)
         {
             <tr>
-                <td>@leaveNote.StudentId</td>
-                <td>@leaveNote.Instructorid</td>
+                <td>@leaveNote.FullName</td>
+                <td>@leaveNote.FirstName</td>
                 <td>@leaveNote.Note</td>
                 <td>@leaveNote.Date</td>
                 @if (leaveNote.IsApproved == false && leaveNote.IsRejected == false)
@@ -31,16 +31,16 @@
                     }
                         else
                         {
-                            <td>Pending</td>
+                            <td style="color:blue">Pending</td>
                         }
                 }
                 else if (leaveNote.IsApproved == true)
                 {
-                        <td>Approved</td>
+                        <td style="color:green;">Approved</td>
                     }
                     else
                     {
-                        <td>Rejected</td>
+                        <td style="color:red">Rejected</td>
                     }
             </tr>
         }

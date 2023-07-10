@@ -11,8 +11,10 @@ using System.Web.Mvc;
 
 namespace DBSchoolManagementSystem.Controllers
 {
+    
     public class HomeController : Controller  
     {
+        SchoolManagement db = new SchoolManagement();
         public ActionResult Index()
         {
             return View();
@@ -56,6 +58,9 @@ namespace DBSchoolManagementSystem.Controllers
             return View();
         }
 
-        
+       
+
+
+
     }
 }

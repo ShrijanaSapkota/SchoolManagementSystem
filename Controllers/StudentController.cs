@@ -306,6 +306,7 @@ namespace DBSchoolManagementSystem.Controllers
         }
         public ActionResult SubmitLeaveNote()
         {
+          
             var viewModel = new LeaveNoteViewModel();
             ViewBag.Instructors = db.Instructor.ToList();
 
@@ -316,26 +317,30 @@ namespace DBSchoolManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitLeaveNote(LeaveNoteViewModel viewModel)
         {
+
             if (ModelState.IsValid)
             {
-                var UserId=User.Identity.GetUserId();
+                var UserId = User.Identity.GetUserId();
                 Student model = new Student();
-                model = db.Student.FirstOrDefault(x=>x.UserId==UserId);
-
-                var leaveNote = new LeaveNote
+                model = db.Student.FirstOrDefault(x => x.UserId == UserId);
+                if (model != null)
                 {
+                    var leaveNote = new leaveNote
+                    {
 
 
-                    StudentId = model.StudentId,
-                    Instructorid = viewModel.Instructorid,
-                    Note = viewModel.Note,
-                    Date = DateTime.Now
-                };
+                        StudentId = model.StudentId,
+                        Instructorid = viewModel.Instructorid,
+                        Note = viewModel.Note,
+                        Date = DateTime.Now
+                    };
 
-                db.LeaveNotes.Add(leaveNote);
-                db.SaveChanges();
 
-                return RedirectToAction("Index");
+                    db.LeaveNotes.Add(leaveNote);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.Instructors = db.Instructor.ToList();

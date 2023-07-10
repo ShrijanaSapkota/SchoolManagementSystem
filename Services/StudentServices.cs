@@ -125,7 +125,16 @@ namespace DBSchoolManagementSystem.Services
             }
         }
 
-       
+       public List<leaveNote>GetLeaveNoteList()
+        {
+            using (SchoolManagement  db= new SchoolManagement())
+                    {
+                List<leaveNote> leaveNotes = new List<leaveNote>();
+                leaveNotes = db.Database.SqlQuery<leaveNote>("exec ListLeaveNote").ToList();
+                return leaveNotes;
+            }
+           
+        }
 
 
     }

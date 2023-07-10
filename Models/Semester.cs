@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,15 +7,13 @@ using System.Web;
 
 namespace DBSchoolManagementSystem.Models
 {
-    public class Course
+    public class Semester
     {
         [Key]
-        public int Courseid { get; set; }
-        public string CourseName { get; set; }
-        public int DepartmentId { get; set; }
-
         public int SemesterId { get; set; }
+        public string SemesterName { get; set; }
+
         [NotMapped]
-        public List<Course> CourseList { get; internal set; }
+        public List<Semester> SemesterList { get;  set; }
     }
 }

@@ -135,20 +135,40 @@
                 <h6 class="collapse-header">LeaveNote</h6>
 
                 @if (!User.IsInRole("Instructor") || !User.IsInRole("Admin"))
-              
+
                 {
                     <a class="collapse-item" href="~/Student/SubmitLeaveNote">Create LeaveNote</a>
                 }
-     
-                
 
-            <a class="collapse-item" href="~/Instructor/ViewLeaveNotes"> View Leave Note</a>
 
-                
+
+                <a class="collapse-item" href="~/Instructor/ViewLeaveNotes"> View Leave Note</a>
+
+
 
             </div>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAssignment"
+           aria-expanded="true" aria-controls="collapseAssignment">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Assignment</span>
+        </a>
+        <div id="collapseAssignment" class="collapse" aria-labelledby="headingAssignment"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Assignment Details:</h6>
+                <a class="collapse-item" href="~/Assignment/Index">AssignmentList</a>
+
+
+                <a class="collapse-item" href="~/Assignment/Create">Create Assignment</a>
+
+
+            </div>
+        </div>
+    </li>
+   
 
     <!-- Nav Item - Pages Collapse Menu -->
     <!-- Divider -->

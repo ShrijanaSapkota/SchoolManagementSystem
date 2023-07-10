@@ -47,6 +47,8 @@ namespace DBSchoolManagementSystem.Models
         public List<StudentVm> StudentVmList { get;  set; }
         [NotMapped]
         public List<StudentSubject> StudentSubjectList { get; set; }
+
+
         public List<Vm> VmList { get;  set; }
         
         

@@ -1,0 +1,30 @@
+﻿﻿@model DBSchoolManagementSystem.Models.Assignment
+
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+
+
+
+
+@using (Html.BeginForm("Create", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+    <!-- Assignment form fields -->
+    <div class="form-group">
+        <label for="uploadedFiles">Upload Files:</label>
+        <input type="file" name="uploadedFiles" id="uploadedFiles" multiple />
+    </div>
+    <input type="submit" value="Create Assignment" class="btn btn-primary" />
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
