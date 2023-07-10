@@ -24,6 +24,7 @@ namespace DBSchoolManagementSystem.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        StudentServices _SS = new StudentServices();
 
         public StudentController()
         {
@@ -35,6 +36,7 @@ namespace DBSchoolManagementSystem.Controllers
             SignInManager = signInManager;
         }
 
+        #region applicationsigninmanager
         public ApplicationSignInManager SignInManager
         {
             get
@@ -59,20 +61,19 @@ namespace DBSchoolManagementSystem.Controllers
             }
         }
         SchoolManagement db = new SchoolManagement();
+
+        #endregion
+
+        #region crudstudent
         public ActionResult Index()
-        {
-            Student model = new Student();
-            model.StudentList = new List<Student>();
-            model.StudentList = db.Student.ToList();
+        { 
+            var model = db.Student.ToList();
             return View(model);
         }
         
         public ActionResult ListStudent()
-        {
-            StudentServices _SS = new StudentServices();
-            Student model = new Student();
-            model.StudentVmList = new List<StudentVm>();
-            model.StudentVmList =_SS.GetStudentList();
+        { 
+            var model =_SS.GetStudentList();
 
             return View(model);
         }
@@ -138,9 +139,8 @@ namespace DBSchoolManagementSystem.Controllers
             if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student model = new Student();
-            model = db.Student.Find(id);
+            } 
+           var model = db.Student.Find(id);
             if (model == null)
             {
                 model = new Student();
@@ -217,7 +217,7 @@ namespace DBSchoolManagementSystem.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student model = db.Student.Find(id);
+            var model = db.Student.Find(id);
             db.Student.Remove(model);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -228,7 +228,7 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student model = db.Student.Find(id);
+            var model = db.Student.Find(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -239,14 +239,13 @@ namespace DBSchoolManagementSystem.Controllers
 
         public ActionResult SaveStd()
         {
-            Student model = new Student();
+            var model = new Student();
             model.EnrollmentDate = DateTime.Now;
             return View(model);
         }
         [HttpPost]
         public ActionResult SaveStd(Student model)
         {
-            StudentServices _SS = new StudentServices();
             String message = _SS.InsertStudent(model);
             if (message == "Saved Successfully")
             {
@@ -257,9 +256,8 @@ namespace DBSchoolManagementSystem.Controllers
         }
 
         public ActionResult Update(int id)
-        {
-            Student model = new Student();
-            model = db.Student.Find(id);
+        { 
+            var model = db.Student.Find(id);
             if (model == null)
             {
                 model = new Student();
@@ -269,7 +267,6 @@ namespace DBSchoolManagementSystem.Controllers
         [HttpPost]
         public ActionResult Update(Student model)
         {
-            StudentServices _SS = new StudentServices();
             String message = _SS.UpdateStudent(model);
             if (message == "Update Successfully")
             {
@@ -284,7 +281,7 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student model = db.Student.Find(id);
+            var model = db.Student.Find(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -293,10 +290,8 @@ namespace DBSchoolManagementSystem.Controllers
         }
         [HttpPost, ActionName("DeleteStd")]
         public ActionResult DeleteStd(int id)
-        {
-            Student model = new Student();
-            model = db.Student.Find(id);
-            StudentServices _SS = new StudentServices();
+        { 
+            var model = db.Student.Find(id);
             String message = _SS.DeleteStudent(id);
             if (message == "Deleted Successfully")
             {
@@ -304,6 +299,9 @@ namespace DBSchoolManagementSystem.Controllers
             }
             return View(model);
         }
+        #endregion
+
+        #region leavenote
         public ActionResult SubmitLeaveNote()
         {
           
@@ -321,8 +319,7 @@ namespace DBSchoolManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 var UserId = User.Identity.GetUserId();
-                Student model = new Student();
-                model = db.Student.FirstOrDefault(x => x.UserId == UserId);
+               var model = db.Student.FirstOrDefault(x => x.UserId == UserId);
                 if (model != null)
                 {
                     var leaveNote = new leaveNote
@@ -347,7 +344,7 @@ namespace DBSchoolManagementSystem.Controllers
 
             return View(viewModel);
         }
-
+        #endregion
 
 
     }

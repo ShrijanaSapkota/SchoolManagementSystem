@@ -19,17 +19,23 @@ namespace DBSchoolManagementSystem.Controllers
     {
             private ApplicationSignInManager _signInManager;
             private ApplicationUserManager _userManager;
+            SchoolManagement db = new SchoolManagement();
+           StudentServices _SS = new StudentServices();
 
-            public InstructorController()
-            {
-            }
 
-            public InstructorController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+
+        public InstructorController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
             {
                 UserManager = userManager;
                 SignInManager = signInManager;
             }
 
+        public InstructorController()
+        {
+
+        }
+
+        #region application
             public ApplicationSignInManager SignInManager
             {
                 get
@@ -53,27 +59,21 @@ namespace DBSchoolManagementSystem.Controllers
                     _userManager = value;
                 }
             }
+        #endregion
 
-            SchoolManagement db = new SchoolManagement();
-
+        #region crud
         public ActionResult Index()
-        {
-            Instructor model = new Instructor();
-            model.InstructorList = new List<Instructor>();
-            model.InstructorList = db.Instructor.ToList();
+        { 
+            var model = db.Instructor.ToList();
 
             return View(model);
-        }
-        public ActionResult AddItem()
-        {
-            return View();
-        }
-
+        } 
         public ActionResult Create()
 
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Instructor model)
@@ -98,9 +98,8 @@ namespace DBSchoolManagementSystem.Controllers
         }
 
         public ActionResult Edit(int id)
-        {
-            Instructor model = new Instructor();
-            model = db.Instructor.Find(id);
+        { 
+           var model = db.Instructor.Find(id);
             if (model == null)
             {
                 model = new Instructor();
@@ -120,7 +119,7 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instructor model = db.Instructor.Find(id);
+          var model = db.Instructor.Find(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -130,7 +129,7 @@ namespace DBSchoolManagementSystem.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Instructor model = db.Instructor.Find(id);
+            var model = db.Instructor.Find(id);
             db.Instructor.Remove(model);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -141,7 +140,7 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instructor model = db.Instructor.Find(id);
+            var model = db.Instructor.Find(id);
             if (model == null)
             {
                 return HttpNotFound();
@@ -149,17 +148,15 @@ namespace DBSchoolManagementSystem.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region leavenotes
         public ActionResult ViewLeaveNotes()
         {
-            StudentServices _SS = new StudentServices();
             
-            List<leaveNote> leaveNotes = _SS.GetLeaveNoteList();
+            var leaveNotes = _SS.GetLeaveNoteList();
           
-            
-
-
-            // Retrieve all leave notes from the database
-            var leaveNote = db.LeaveNotes.ToList();
+             
 
             return View(leaveNotes);
         }
@@ -181,7 +178,8 @@ namespace DBSchoolManagementSystem.Controllers
             db.SaveChanges();
             return RedirectToAction(nameof(ViewLeaveNotes));
         }
-            
-    }
+        #endregion
 
     }
+
+}

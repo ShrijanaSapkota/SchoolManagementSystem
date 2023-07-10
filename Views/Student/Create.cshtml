@@ -3,7 +3,60 @@
 @{
     ViewBag.Title = "Create";
 }
-
+<style>
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+    
+    .form-container h4 {
+        margin-top: 0;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .control-label {
+        font-weight: bold;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    .text-danger {
+        color: red;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #fff;
+    }
+    
+    .btn-primary {
+        background-color: blue;
+    }
+    
+    .btn-primary:hover {
+        background-color: darkblue;
+    }
+</style>
 <h2>Create</h2>
 
 
@@ -68,7 +121,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EnrollmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="date" name="EnrollmentDate" class="form-control" />
+                @*@Html.EditorFor(model => model.EnrollmentDate, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.EnrollmentDate, "", new { @class = "text-danger" })
             </div>
         </div>

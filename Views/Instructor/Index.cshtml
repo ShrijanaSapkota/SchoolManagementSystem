@@ -1,4 +1,4 @@
-﻿@model DBSchoolManagementSystem.Models.Instructor
+﻿@model List<DBSchoolManagementSystem.Models.Instructor>
 
 @{
     ViewBag.Title = "Index";
@@ -30,7 +30,7 @@
 
 
 
-    @foreach (var item in Model.InstructorList)
+    @foreach (var item in Model)
     {
         <tr alignstyle="margin:0 auto">
 
