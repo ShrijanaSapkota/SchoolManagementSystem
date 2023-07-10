@@ -2367,6 +2367,7 @@
     <Content Include="Views\Assignment\Create.cshtml" />
     <Content Include="Views\Assignment\Index.cshtml" />
     <Content Include="Views\Course\AssignInstructor.cshtml" />
+    <Content Include="Views\Course\AssignIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

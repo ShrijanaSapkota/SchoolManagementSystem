@@ -15,12 +15,21 @@
 
 @using (Html.BeginForm("Create", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="Title">
+    </div>
 
 
     <!-- Assignment form fields -->
     <div class="form-group">
-        <label for="uploadedFiles">Upload Files:</label>
-        <input type="file" name="uploadedFiles" id="uploadedFiles" multiple />
+        <label for="uploadedFiles">Description:</label>
+        <input type="text" name="Description" />
+    </div>
+
+    <div class="form-group">
+        <label for="title">Due Date:</label>
+        <input type="date" name="DueDate">
     </div>
     <input type="submit" value="Create Assignment" class="btn btn-primary" />
 }

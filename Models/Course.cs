@@ -17,6 +17,7 @@ namespace DBSchoolManagementSystem.Models
         public int DepartmentId { get; set; }
 
         public int SemesterId { get; set; }
+        public int Instructorid { get; set; }
         [NotMapped]
         public List<Course> CourseList { get; internal set; }
     }

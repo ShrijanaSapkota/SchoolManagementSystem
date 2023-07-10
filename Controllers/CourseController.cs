@@ -1,4 +1,5 @@
 ﻿using DBSchoolManagementSystem.Models;
+using DBSchoolManagementSystem.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,6 +12,7 @@ namespace DBSchoolManagementSystem.Controllers
 {
     public class CourseController : Controller
     {
+        StudentServices _SS=new StudentServices();
         // GET: Course
         SchoolManagement db = new SchoolManagement();
 
@@ -120,21 +122,32 @@ namespace DBSchoolManagementSystem.Controllers
 
         public ActionResult AssignInstructor(AssignInstructor model)
         {
+            
             if (ModelState.IsValid)
             {
                 db.AssignInstructor.Add(model);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AssignIndex");
             }
 
             return View();
         }
+        public ActionResult AssignIndex()
+        {
+
+
+
+
+            var assigninstructor = _SS.GetAssignInstructorList();
+            return View(assigninstructor);
+
+        }
+
         [HttpGet]
         [Route("get/CourseunderDepartment")]
         public JsonResult CourseunderDepartment(int Id)
         {
-            Course course = new Course();
-            course.CourseList = new List<Course>();
+       
            var data = db.Course.Where(x => x.Courseid == Id).ToList();
             return Json(data);
         }

@@ -18,7 +18,28 @@ namespace DBSchoolManagementSystem.Models
         
 
 		public int DepartmentId { get; set; }
-        [NotMapped]
-        public List<AssignInstructor> AssignInstructorList { get;  set; }
+       
+        
+
+
+    }
+    public class AssignInstructorVm
+    {
+        public int Courseid { get; set; }
+
+
+        public string CourseName { get; set; }
+   
+
+        public string InstructorName { get; set; }
+
+
+
+        public string DepartmenttName { get; set; }
+
+   
+
+        public string SemesterName { get; set; }
+
     }
 }

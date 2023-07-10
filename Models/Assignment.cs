@@ -16,6 +16,7 @@ namespace DBSchoolManagementSystem.Models
         public DateTime DueDate { get; set; }
         [NotMapped]
         public ICollection<UploadedFile> UploadedFiles { get; set; }
+        [NotMapped]
         public List<Assignment> AssignmentList { get;  set; }
     }
     public class UploadedFile

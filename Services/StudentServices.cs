@@ -119,7 +119,7 @@ namespace DBSchoolManagementSystem.Services
             {
                 List<AspNetRoles> AspNetUserRolesList = new List<AspNetRoles>();
 
-                AspNetUserRolesList = db.Database.SqlQuery<AspNetRoles>("exec ListUserRoles").ToList();
+                AspNetUserRolesList = db.Database.SqlQuery<AspNetRoles>("exec [dbo].[ListUserRoles]").ToList();
 
                 return AspNetUserRolesList;
             }
@@ -134,6 +134,17 @@ namespace DBSchoolManagementSystem.Services
                 return leaveNotes;
             }
            
+        }
+
+        public List<AssignInstructorVm>GetAssignInstructorList()
+        {
+            using(SchoolManagement db =new SchoolManagement())
+            {
+                List<AssignInstructorVm> assignInstructors = new List<AssignInstructorVm>();
+                assignInstructors = db.Database.SqlQuery<AssignInstructorVm>("exec AssignInstructorList").ToList();
+                return assignInstructors;
+            }
+
         }
 
 
