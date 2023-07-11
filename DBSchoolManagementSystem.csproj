@@ -182,7 +182,7 @@
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="CommonUtilities.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AssignmentController.cs" />
+    <Compile Include="Controllers\AssignStudentController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DepartmentCourseController.cs" />
@@ -202,6 +202,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs" />
     <Compile Include="Models\Assignment.cs" />
+    <Compile Include="Models\AssignStudent.cs" />
     <Compile Include="Models\LeaveNote.cs" />
     <Compile Include="Models\LeaveNoteViewModel.cs" />
     <Compile Include="Models\Course.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\SchoolManagement.cs" />
     <Compile Include="Models\Semester.cs" />
     <Compile Include="Models\Student.cs" />
@@ -2363,11 +2365,16 @@
     <Content Include="Views\Account\AdminLogin.cshtml" />
     <Content Include="Views\Student\SubmitLeaveNote.cshtml" />
     <Content Include="Views\Instructor\ViewLeaveNotes.cshtml" />
-    <Content Include="Views\EmailSetup\Index.cshtml" />
     <Content Include="Views\Assignment\Create.cshtml" />
     <Content Include="Views\Assignment\Index.cshtml" />
     <Content Include="Views\Course\AssignInstructor.cshtml" />
     <Content Include="Views\Course\AssignIndex.cshtml" />
+    <Content Include="Views\Assignment\Submit.cshtml" />
+    <Content Include="Views\Student\MyAssignments.cshtml" />
+    <Content Include="Views\Student\SubmitAssignment.cshtml" />
+    <Content Include="Views\Instructor\CreateAssignment.cshtml" />
+    <Content Include="Views\AssignStudent\create.cshtml" />
+    <Content Include="Views\AssignStudent\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,7 @@
 
 <h2>AssignIndex</h2>
 
-<table>
+<table class="table">
     <tr>
         <th>Instructor Name</th>
         <th>Department Name</th>
@@ -57,4 +57,41 @@
         </tr>
     }
     </table>
+
+<style>
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .table th, .table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+    .action-link {
+        color: #000;
+        margin-right: 5px;
+        text-decoration: none;
+    }
+
+        .action-link.edit-link {
+            color: blue;
+        }
+
+        .action-link.details-link {
+            color: green;
+        }
+
+        .action-link.delete-link {
+            color: red;
+        }
+</style>
 

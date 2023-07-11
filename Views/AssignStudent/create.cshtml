@@ -1,0 +1,50 @@
+﻿@using DBSchoolManagementSystem.Models
+@model AssignStudent
+@{
+    var student = ViewBag.StudentList as List<Student>;
+    var department = ViewBag.DepartmentList as List<Department>;
+    var semester = ViewBag.SemesterList as List<Semester>;
+}
+@{
+    ViewBag.Title = "AssignStudent";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<h2>AssignInstructor</h2>
+<form method="post" action="/AssignStudent/create">
+    <div>
+        <label>Student</label>
+        <select name="StudentId">
+            <option value="">Select Student.</option>
+            @foreach (var items in student)
+            {
+                <option value="@items.StudentId">@items.FullName</option>
+            }
+        </select>
+        <label>Department</label>
+        <select name="DepartmentId" class="department">
+            <option value="">Select Department..</option>
+            @foreach (var items in department)
+            {
+                <option value="@items.DepartmentId">@items.DepartmenttName</option>
+            }
+        </select>
+        <label>Semester</label>
+        <select name="SemesterId" class="Semester">
+            <option value="">Select Semester..</option>
+            @foreach (var items in semester)
+            {
+                <option value="@items.SemesterId">@items.SemesterName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+
+
+
+</form>

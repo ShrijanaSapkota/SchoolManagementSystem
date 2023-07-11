@@ -1,0 +1,55 @@
+﻿@model DBSchoolManagementSystem.Models.Assignment
+
+@using DBSchoolManagementSystem.Models
+@{
+
+    var course = ViewBag.Course as List<Course>;
+}
+
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+
+
+
+@using (Html.BeginForm("CreateAssignment", "Instructor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+
+{
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="Title">
+    </div>
+    <div class="form-group">
+        <label >Course:</label>
+        <select name="Courseid">
+            <option value="">Select Course..</option>
+            @foreach (var item in course)
+            {
+                <option value = "@item.Courseid"> @item.CourseName </option >
+            }
+        </select >
+       
+    </div>
+
+    <!-- Assignment form fields -->
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea type="text" name="Description">Description</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="title">Due Date:</label>
+        <input type="date" name="DueDate">
+    </div>
+    <input type="submit" value="Create Assignment" class="btn btn-primary" />
+
+}
+

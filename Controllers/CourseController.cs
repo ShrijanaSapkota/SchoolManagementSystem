@@ -145,11 +145,12 @@ namespace DBSchoolManagementSystem.Controllers
 
         [HttpGet]
         [Route("get/CourseunderDepartment")]
-        public JsonResult CourseunderDepartment(int Id)
+        public JsonResult CourseunderDepartment(int Courseid)
         {
-       
-           var data = db.Course.Where(x => x.Courseid == Id).ToList();
-            return Json(data);
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Course>CourseList =db.Course.Where(x => x.Courseid == Courseid).ToList();
+
+            return Json(CourseList,JsonRequestBehavior.AllowGet);
         }
     }    
 }

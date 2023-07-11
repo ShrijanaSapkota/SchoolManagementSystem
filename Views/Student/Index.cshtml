@@ -1,4 +1,7 @@
-﻿@model DBSchoolManagementSystem.Models.Student
+﻿@*@model DBSchoolManagementSystem.Models.Student
+    @using DBSchoolManagementSystem.Models*@
+@using DBSchoolManagementSystem.Models
+@model List<Student>
 
 @{
     ViewBag.Title = "Index";
@@ -7,9 +10,9 @@
 <h2>Student</h2>
 @if (User.IsInRole("Admin"))
 {
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 
 }
 <h4 class="text-success">@TempData["msg"]</h4>
@@ -33,7 +36,7 @@
 
     </tr>
 
-    @foreach (var item in Model.StudentList)
+    @foreach (var item in Model)
 
     {
         <tr>
@@ -73,49 +76,32 @@
             </td>
 
 
-            
+
 
 
             <td>
                 @if (User.IsInRole("Admin"))
                 {
-                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }, new { style = "color: blue; margin-right: 5px;" })}
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }, new { style = "color: blue; margin-right: 5px;" })}
                 @Html.ActionLink("Details", "Details", new { id = item.StudentId }, new { style = "color: green; margin-right: 5px;" })
 
                 @if (User.IsInRole("Admin"))
-                                {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }, new { style = "color: red; margin-right: 5px;" }) }
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }, new { style = "color: red; margin-right: 5px;" })}
 
             </td>
         </tr>
     }
 </table>
-@*<span class="alert alert-heading">SubjectStudent</span>
-    <div class="well well-small" id="Add-Item" style="width: 1090px;">
 
-
-        @Html.ActionLink("AddMore", null, new { @id = "btns", @class = "addProductItem btn btn-success btn-sm fa fa-plus" })
-
-        <table class="table-responsive" id="tblotm" style="width: 1020px; margin-left: 0px !important; margin-top: 10px;">
-            <tr>
-
-
-                <td style="width:145px;">Subject Id</td>
-
-
-            </tr>
-
-
-        </table>
-        </div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
 
 }
-<style>
-</style>
+
+
 
 
 

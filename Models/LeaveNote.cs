@@ -11,13 +11,13 @@ namespace DBSchoolManagementSystem.Models
         public int Id { get; set; }
        
         public int StudentId { get; set; }
-        [NotMapped]
+
         public string FullName { get; set; }
         [NotMapped]
         public virtual Student Student { get; set; }
         
         public int Instructorid { get; set; }
-        [NotMapped]
+      
         public string FirstName { get; set; }
         [NotMapped]
         public virtual Instructor Instructor { get; set; }

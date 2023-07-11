@@ -125,7 +125,7 @@ namespace DBSchoolManagementSystem.Services
             }
         }
 
-       public List<leaveNote>GetLeaveNoteList()
+       public List<leaveNote> GetLeaveNoteList()
         {
             using (SchoolManagement  db= new SchoolManagement())
                     {
@@ -146,6 +146,28 @@ namespace DBSchoolManagementSystem.Services
             }
 
         }
+        public List<AssignStudentVm> GetAssignStudentList()
+        {
+            using (SchoolManagement db = new SchoolManagement())
+            {
+                List<AssignStudentVm> assignStudent = new List<AssignStudentVm>();
+                assignStudent= db.Database.SqlQuery<AssignStudentVm>("exec AssignStudentList").ToList();
+                return assignStudent;
+            }
+
+        }
+
+        public List<Message> GetAssignMessageList()
+        {
+            using (SchoolManagement db = new SchoolManagement())
+            {
+                List<Message> message = new List<Message>();
+                message = db.Database.SqlQuery<Message>("exec AssignmentMessageList").ToList();
+                return message;
+            }
+
+        }
+
 
 
     }

@@ -1,0 +1,57 @@
+﻿@*@model  DBSchoolManagementSystem.Models.AssignInstructor*@
+@using DBSchoolManagementSystem.Models
+@model List<AssignStudentVm>
+
+@{
+    ViewBag.Title = "Index";
+}
+<p>
+    @Html.ActionLink("create", "create")
+</p>
+
+<h2>Student</h2>
+
+<table class="table">
+    <tr>
+        <th>Student Name</th>
+        <th>Department Name</th>
+        <th>Semester Name</th>
+
+
+        <th>Action</th>
+    </tr>
+    @foreach (var item in Model)
+
+    {
+        <tr>
+            <td>
+                @item.FullName
+            </td>
+            <td>
+                @item.DepartmenttName
+            </td>
+            
+
+
+
+            <td>
+                @item.SemesterName
+            </td>
+
+
+
+
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }, new { style = "color: blue; margin-right: 5px;" })
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.StudentId }, new { style = "color: green; margin-right: 5px;" })
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StudentId }, new { style = "color: red; margin-right: 5px;" })}
+            </td>
+        </tr>
+    }
+</table>
+

@@ -14,7 +14,10 @@
 
 
 @using (Html.BeginForm("Create", "Assignment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+
 {
+
     <div class="form-group">
         <label for="title">Title:</label>
         <input type="text" name="Title">
@@ -23,8 +26,8 @@
 
     <!-- Assignment form fields -->
     <div class="form-group">
-        <label for="uploadedFiles">Description:</label>
-        <input type="text" name="Description" />
+        <label for="description">Description:</label>
+        <textarea type="text" name="Description" >Description</textarea>
     </div>
 
     <div class="form-group">
@@ -32,6 +35,66 @@
         <input type="date" name="DueDate">
     </div>
     <input type="submit" value="Create Assignment" class="btn btn-primary" />
+
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+
+            input[type="text"]:focus,
+            input[type="date"]:focus {
+                border-color: #66afe9;
+                outline: 0;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+            .btn-primary:hover,
+            .btn-primary:focus,
+            .btn-primary:active,
+            .btn-primary.active {
+                color: #fff;
+                background-color: #286090;
+                border-color: #204d74;
+            }
+    </style>
+
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

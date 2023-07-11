@@ -71,6 +71,7 @@ namespace DBSchoolManagementSystem.Controllers
         public ActionResult Create()
 
         {
+
             return View();
         }
 
@@ -84,6 +85,7 @@ namespace DBSchoolManagementSystem.Controllers
             {
                 var myuser = await UserManager.FindByEmailAsync(model.Email);
                 await UserManager.AddToRoleAsync(myuser.Id, "Instructor");
+                model.UserId = myuser.Id;
 
                 if (ModelState.IsValid)
                 {
@@ -180,6 +182,41 @@ namespace DBSchoolManagementSystem.Controllers
         }
         #endregion
 
+        [HttpGet]
+        public ActionResult CreateAssignment()
+        {
+            ViewBag.Course = db.Course.ToList();
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult>  CreateAssignment(Assignment assignment)
+        {
+            // Save the assignment to the database
+            db.Assignment.Add(assignment);
+            db.SaveChanges();
+   
+            var StudentList = _SS.GetAssignMessageList().Where(x=>x.Courseid==assignment.Courseid);
+
+            // Assign the assignment to the selected students
+            foreach (var item in StudentList)
+            {
+                var studentAssignment = new StudentAssignment
+                {
+                    StudentId = item.StudentId,
+                    AssignmentId = assignment.AssignmentId,
+                    SubmissionDate = DateTime.Now // Set the submission date to the current date
+                };
+
+                db.StudentAssignments.Add(studentAssignment);
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+        
     }
 
 }

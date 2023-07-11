@@ -20,7 +20,9 @@ namespace DBSchoolManagementSystem.Models
         public DbSet<StudentSubject> StudentSubject{ get; set; }
         public DbSet<leaveNote> LeaveNotes { get; set; }
         public DbSet<Assignment> Assignment { get; set; }
+        public DbSet<StudentAssignment> StudentAssignments { get; set; }
         public DbSet<Semester> Semester { get; set; }
+        public DbSet<AssignStudent> AssignStudent{ get; set; }
 
         public DbSet<AssignInstructor> AssignInstructor { get; set; }
 

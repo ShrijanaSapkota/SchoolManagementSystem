@@ -19,11 +19,15 @@ namespace DBSchoolManagementSystem.Models
         public string Courses { get; set; }
         public int? TypeId { get; set; }
         public int? DepartmentId { get; set; }
+        public string UserId { get; set; }
+
         public int? Courseid { get; set; }
         [NotMapped]
         public string RoleId { get; set; }
         [NotMapped]
         public int Id { get; set; }
+        [NotMapped]
+        public string SemesterName { get; set; }
 
 
         //public  EmployeeType EmployeeType { get; set; }

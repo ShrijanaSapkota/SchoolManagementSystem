@@ -1,8 +1,34 @@
-﻿
+﻿@model DBSchoolManagementSystem.Models.Assignment
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Assignment";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Assuming you have a shared layout file
 }
 
-<h2>Index</h2>
+<h2>Assignment Details</h2>
+
+<div class="assignment-details">
+    <h4>@Model.Title</h4>
+
+    <p>Due Date: @Model.DueDate.ToShortDateString()</p>
+</div>
+
+@if (Model.UploadedFiles != null && Model.UploadedFiles.Any())
+{
+    <h4>Uploaded Files</h4>
+    <ul>
+        @foreach (var file in Model.UploadedFiles)
+        {
+            <li>
+                @file.FileName
+                <a href="@file.FilePath" download>Download</a>
+            </li>
+        }
+    </ul>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 

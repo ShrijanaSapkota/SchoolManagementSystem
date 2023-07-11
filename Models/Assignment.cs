@@ -10,22 +10,19 @@ namespace DBSchoolManagementSystem.Models
     public class Assignment
     {
         [Key]
-        public int Id { get; set; }
+        public int AssignmentId { get; set; }
+        public int Courseid { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DueDate { get; set; }
-        [NotMapped]
-        public ICollection<UploadedFile> UploadedFiles { get; set; }
-        [NotMapped]
-        public List<Assignment> AssignmentList { get;  set; }
     }
-    public class UploadedFile
+
+    public class StudentAssignment
     {
-    
-        public int Id { get; set; }
-        public string FileName { get; set; }
-        public string FilePath { get; set; }
-        // Additional properties if needed
+        public int StudentAssignmentId { get; set; }
+        public int StudentId { get; set; }
+        public int AssignmentId { get; set; }
+        public DateTime SubmissionDate { get; set; }
     }
 
 }

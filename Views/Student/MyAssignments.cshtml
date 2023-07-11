@@ -1,0 +1,14 @@
+﻿@using DBSchoolManagementSystem.Models
+@model List<Assignment>
+
+<h2>My Assignments</h2>
+
+@foreach (var assignment in Model)
+{
+    <div>
+        <h3>@assignment.Title</h3>
+        <p>@assignment.Description</p>
+        <p>Due Date: @assignment.DueDate.ToString("yyyy-MM-dd")</p>
+        <a href="@Url.Action("SubmitAssignment", "Student", new { assignmentId = assignment.AssignmentId })">Submit Assignment</a>
+    </div>
+}
