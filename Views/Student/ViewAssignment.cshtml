@@ -1,0 +1,24 @@
+﻿@using DBSchoolManagementSystem.Models
+@model IEnumerable<Assignment>
+
+
+@{
+    ViewBag.Title = "ViewAssignment";
+}
+
+<h2>ViewAssignment</h2>
+<div>
+    @foreach (var m in Model)
+    {
+
+        @Html.ActionLink("Assignment", "Assignment", new { id = m.AssignmentId })       
+        {
+        <div>
+    <span>@m.Title</span>
+    <span>@m.Description</span>
+    <span>@m.DueDate</span>
+</div>
+        }
+    }
+</div>
+

@@ -196,7 +196,10 @@ namespace DBSchoolManagementSystem.Controllers
             // Save the assignment to the database
             db.Assignment.Add(assignment);
             db.SaveChanges();
-   
+           
+
+            return RedirectToAction("Index", "Home");
+
             var StudentList = _SS.GetAssignMessageList().Where(x=>x.Courseid==assignment.Courseid);
 
             // Assign the assignment to the selected students
@@ -214,9 +217,10 @@ namespace DBSchoolManagementSystem.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MessageIndex", "Home");
         }
-        
-    }
+       
+
+}
 
 }

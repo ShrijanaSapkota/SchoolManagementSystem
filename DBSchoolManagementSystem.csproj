@@ -216,6 +216,7 @@
     <Compile Include="Models\SchoolManagement.cs" />
     <Compile Include="Models\Semester.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentAsisignmentViewModel.cs" />
     <Compile Include="Models\StudentSubject.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\UserType.cs" />
@@ -2370,11 +2371,12 @@
     <Content Include="Views\Course\AssignInstructor.cshtml" />
     <Content Include="Views\Course\AssignIndex.cshtml" />
     <Content Include="Views\Assignment\Submit.cshtml" />
-    <Content Include="Views\Student\MyAssignments.cshtml" />
     <Content Include="Views\Student\SubmitAssignment.cshtml" />
     <Content Include="Views\Instructor\CreateAssignment.cshtml" />
     <Content Include="Views\AssignStudent\create.cshtml" />
     <Content Include="Views\AssignStudent\Index.cshtml" />
+    <Content Include="Views\Home\MessageIndex.cshtml" />
+    <Content Include="Views\Student\ViewAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

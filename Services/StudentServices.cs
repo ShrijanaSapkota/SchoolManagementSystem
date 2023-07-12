@@ -141,7 +141,7 @@ namespace DBSchoolManagementSystem.Services
             using(SchoolManagement db =new SchoolManagement())
             {
                 List<AssignInstructorVm> assignInstructors = new List<AssignInstructorVm>();
-                assignInstructors = db.Database.SqlQuery<AssignInstructorVm>("exec AssignInstructorList").ToList();
+                assignInstructors = db.Database.SqlQuery<AssignInstructorVm>("EXEC AssignInstructorList").ToList();
                 return assignInstructors;
             }
 
@@ -167,6 +167,7 @@ namespace DBSchoolManagementSystem.Services
             }
 
         }
+      
 
 
 

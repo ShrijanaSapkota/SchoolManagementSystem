@@ -70,7 +70,8 @@
                     {
                         <a class="collapse-item" href="~/Instructor/Create">Create Instructor</a>
                         <a class="collapse-item" href="~/Course/AssignIndex">Assign Instructor</a>
-                       
+                        <a class="collapse-item" href="~/AssignStudent/create">Assign Student</a>
+
                     }
 
                 </div>
@@ -162,12 +163,13 @@
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Assignment Details:</h6>
-                <a class="collapse-item" href="~/Assignment/Index">AssignmentList</a>
+                @if (!User.IsInRole("Instructor"))
+                {
 
 
-                <a class="collapse-item" href="~/Assignment/Create">Create Assignment</a>
+                    <a class="collapse-item" href="~/Instructor/CreateAssignment">Create Assignment</a>
 
-
+                }
             </div>
         </div>
     </li>
@@ -186,5 +188,8 @@
 
 
 </ul>
+
+
+
 
 

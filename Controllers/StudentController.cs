@@ -345,63 +345,57 @@ namespace DBSchoolManagementSystem.Controllers
             return View(viewModel);
         }
         #endregion
-
-        private int GetLoggedInStudentId()
+       
+        public ActionResult ViewAssignment(int id)
         {
-            var userId = User.Identity.GetUserId();
-            var student = db.Student.FirstOrDefault(s => s.UserId == userId);
-            return student?.StudentId ?? 0;
-        }
-
-
-        public ActionResult MyAssignments()
-        {
-            int studentId = GetLoggedInStudentId(); // Implement a method to get the currently logged-in student ID
-
-            // Retrieve the assignments assigned to the student
-            var assignments = (from sa in db.StudentAssignments
-                               join a in db.Assignment on sa.AssignmentId equals a.AssignmentId
-                               where sa.StudentId == studentId
-                               select a).ToList();
-
-            return View(assignments);
-        }
-
-        [HttpGet]
-        public ActionResult SubmitAssignment(int assignmentId)
-        {
-            var assignment = db.Assignment.Find(assignmentId);
-            if (assignment == null)
-            {
-                return HttpNotFound();
-            }
-
+            var assignment = db.Assignment.ToList().Where(x=>x.AssignmentId==id);
             return View(assignment);
         }
 
-        [HttpPost]
-        public ActionResult SubmitAssignment(int assignmentId, HttpPostedFileBase file)
-        {
-            int studentId = GetLoggedInStudentId(); // Implement a method to get the currently logged-in student ID
+        //[HttpPost]
+        //public async Task<ActionResult> SubmitAssignment(StudentAsisignmentViewModel assignmentViewModel, HttpPostedFileBase AssignmentFile)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var UserId = User.Identity.GetUserId();
+        //        var model = db.Student.FirstOrDefault(x => x.UserId == UserId);
+        //        if (model != null)
+        //        {
+        //            var assignment = new Assignment
+        //            {
+        //                AssignmentId = item.ssignmentId,
+        //               Title= item.title,
+        //                Description = item.description,
+        //                Courseid=item.courseid,
+        //                DueDate = DateTime.Now,
 
-            // Save the file to the server or perform any necessary processing
-            string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(file.FileName);
-            string filePath = Path.Combine(Server.MapPath("~/Uploads"), fileName);
-            file.SaveAs(filePath);
+        //            };
+        //            db.Assignment.Add(assignment);
+        //            db.SaveChanges();
 
-            // Save the submission to the database
-            var submission = new StudentAssignment
-            {
-                StudentId = studentId,
-                AssignmentId = assignmentId,
-                SubmissionDate = DateTime.Now // Set the submission date to the current date
-            };
+                    
+        //            if (AssignmentFile != null && AssignmentFile.ContentLength > 0)
+        //            {
+                        
+        //                var uploadPath = Server.MapPath("~/Assignments");
 
-            db.StudentAssignments.Add(submission);
-            db.SaveChanges();
+                        
+        //                var fileName = Path.GetFileName(AssignmentFile.FileName);
+        //                var filePath = Path.Combine(uploadPath, fileName);
 
-            return RedirectToAction("MyAssignments");
-        }
+                       
+        //                AssignmentFile.SaveAs(filePath);
+        //            }
+
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //    }
+
+            
+        //    return View(assignmentViewModel);
+        //}
+
+       
     }
 
 

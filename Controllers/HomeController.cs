@@ -15,9 +15,13 @@ namespace DBSchoolManagementSystem.Controllers
     public class HomeController : Controller  
     {
         SchoolManagement db = new SchoolManagement();
+        StudentServices _SS = new StudentServices();
         public ActionResult Index()
         {
+           ViewBag.message = db.Assignment.ToList();
+
             return View();
+           
         }
         public ActionResult Create()
         {
@@ -57,9 +61,6 @@ namespace DBSchoolManagementSystem.Controllers
         {
             return View();
         }
-
-       
-
 
 
     }
