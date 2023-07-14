@@ -48,10 +48,11 @@ namespace DBSchoolManagementSystem.Models
         [NotMapped]
         public List<StudentSubject> StudentSubjectList { get; set; }
 
+
+
         [NotMapped]
         public List<Vm> VmList { get;  set; }
-        [NotMapped]
-        public List<StudentAsisignmentViewModel> StudentAsisignmentViewModel { get; set; }
+        
 
 
 

@@ -1,18 +1,26 @@
 ﻿@using DBSchoolManagementSystem.Models
-@model Assignment
+@model SubmitAssignment
 
-<h2>Submit Assignment - @Model.Title</h2>
 
-@using (Html.BeginForm("SubmitAssignment", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.Hidden("assignmentId", Model.AssignmentId)
-
-    <div>
-        <label for="file">Upload File:</label>
-        <input type="file" name="file" id="file" />
-    </div>
-
-    <div>
-        <input type="submit" value="Submit" />
-    </div>
+@{
+    ViewBag.Title = "SubmitAssignment";
 }
+
+<h2>ViewAssignment</h2>
+<div>
+
+
+    @Html.ActionLink("Assignment", "Assignment", new { id = Model.AssignmentId })
+
+    {
+    <div>
+        <form method="post" enctype="multipart/form-data" action="/Student/SubmitAssignment">
+            <input type="hidden" name="assignmentId" value="@Model.AssignmentId" />
+            <input type="file" name="assignmentFile" />
+            <input type="submit" value="Submit" />
+        </form>
+
+    </div>
+    }
+
+</div>

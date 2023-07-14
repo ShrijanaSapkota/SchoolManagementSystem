@@ -17,9 +17,9 @@ using System.Web.Mvc;
 
 namespace DBSchoolManagementSystem.Controllers
 {
-    
 
-    
+
+
     public class StudentController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -66,21 +66,21 @@ namespace DBSchoolManagementSystem.Controllers
 
         #region crudstudent
         public ActionResult Index()
-        { 
+        {
             var model = db.Student.ToList();
             return View(model);
         }
-        
+
         public ActionResult ListStudent()
-        { 
-            var model =_SS.GetStudentList();
+        {
+            var model = _SS.GetStudentList();
 
             return View(model);
         }
-       
+
         public ActionResult Create()
         {
-           
+
 
             return View();
         }
@@ -89,7 +89,7 @@ namespace DBSchoolManagementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Student model,HttpPostedFileBase ImageFile)
+        public async Task<ActionResult> Create(Student model, HttpPostedFileBase ImageFile)
         {
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await UserManager.CreateAsync(user, "User12345@@");
@@ -121,7 +121,7 @@ namespace DBSchoolManagementSystem.Controllers
                     }
                     if (ModelState.IsValid)
                     {
-                       
+
                         db.Student.Add(model);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -132,20 +132,20 @@ namespace DBSchoolManagementSystem.Controllers
             }
             return View();
 
-            
+
         }
         public ActionResult Edit(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            } 
-           var model = db.Student.Find(id);
+            }
+            var model = db.Student.Find(id);
             if (model == null)
             {
                 model = new Student();
             }
-            
+
             return View(model);
         }
         [HttpPost]
@@ -190,15 +190,15 @@ namespace DBSchoolManagementSystem.Controllers
             }
 
 
-                
-            
-               return View(model);
+
+
+            return View(model);
         }
 
-           
-        
 
- 
+
+
+
 
 
         public ActionResult Delete(int? id)
@@ -235,7 +235,7 @@ namespace DBSchoolManagementSystem.Controllers
             }
             return View(model);
         }
-      
+
 
         public ActionResult SaveStd()
         {
@@ -256,7 +256,7 @@ namespace DBSchoolManagementSystem.Controllers
         }
 
         public ActionResult Update(int id)
-        { 
+        {
             var model = db.Student.Find(id);
             if (model == null)
             {
@@ -290,7 +290,7 @@ namespace DBSchoolManagementSystem.Controllers
         }
         [HttpPost, ActionName("DeleteStd")]
         public ActionResult DeleteStd(int id)
-        { 
+        {
             var model = db.Student.Find(id);
             String message = _SS.DeleteStudent(id);
             if (message == "Deleted Successfully")
@@ -304,7 +304,7 @@ namespace DBSchoolManagementSystem.Controllers
         #region leavenote
         public ActionResult SubmitLeaveNote()
         {
-          
+
             var viewModel = new LeaveNoteViewModel();
             ViewBag.Instructors = db.Instructor.ToList();
 
@@ -319,7 +319,7 @@ namespace DBSchoolManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 var UserId = User.Identity.GetUserId();
-               var model = db.Student.FirstOrDefault(x => x.UserId == UserId);
+                var model = db.Student.FirstOrDefault(x => x.UserId == UserId);
                 if (model != null)
                 {
                     var leaveNote = new leaveNote
@@ -345,58 +345,58 @@ namespace DBSchoolManagementSystem.Controllers
             return View(viewModel);
         }
         #endregion
-       
-        public ActionResult ViewAssignment(int id)
+
+        public ActionResult Assignment()
         {
-            var assignment = db.Assignment.ToList().Where(x=>x.AssignmentId==id);
-            return View(assignment);
+            ViewBag.message = db.Assignment.ToList();
+
+            return View();
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult> SubmitAssignment(StudentAsisignmentViewModel assignmentViewModel, HttpPostedFileBase AssignmentFile)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var UserId = User.Identity.GetUserId();
-        //        var model = db.Student.FirstOrDefault(x => x.UserId == UserId);
-        //        if (model != null)
-        //        {
-        //            var assignment = new Assignment
-        //            {
-        //                AssignmentId = item.ssignmentId,
-        //               Title= item.title,
-        //                Description = item.description,
-        //                Courseid=item.courseid,
-        //                DueDate = DateTime.Now,
+        public ActionResult ViewAssignment(int  id)
+        {
+            var assignment = db.Assignment.FirstOrDefault(x => x.AssignmentId == id);
+            ViewBag.assignment = assignment;
+            return View();
+        }
 
-        //            };
-        //            db.Assignment.Add(assignment);
-        //            db.SaveChanges();
 
-                    
-        //            if (AssignmentFile != null && AssignmentFile.ContentLength > 0)
-        //            {
-                        
-        //                var uploadPath = Server.MapPath("~/Assignments");
+        [HttpPost]
+        public ActionResult SubmitAssignmentTo(SubmitAssignmentVm s)
+        {
+            string img = "";
+            if (ModelState.IsValid)
+            {
+                if (s.FileUrl != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(s.FileUrl.FileName);
+                    string extension = Path.GetExtension(s.FileUrl.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
+                    img = "../Image/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Image"), fileName);
+                    s.FileUrl.SaveAs(fileName);
 
-                        
-        //                var fileName = Path.GetFileName(AssignmentFile.FileName);
-        //                var filePath = Path.Combine(uploadPath, fileName);
+                }
+                var model = new SubmitAssignment();
+                model.AssignmentId = s.AssignmentId;
+                model.StudentId = 23;
+                model.UploadFile = img;
 
-                       
-        //                AssignmentFile.SaveAs(filePath);
-        //            }
+                db.SubmitAssignment.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("Submit");
+            }
+            return View(s);
 
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //    }
-
+        }
+        public ActionResult Submit()
+        {
+            var submitlist = _SS.GetSubmitList();
             
-        //    return View(assignmentViewModel);
-        //}
+            
+           return View(submitlist);
 
-       
+        }
+    }       
     }
-
-
-}
+    

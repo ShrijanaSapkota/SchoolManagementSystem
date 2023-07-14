@@ -1,0 +1,74 @@
+﻿@*@model DBSchoolManagementSystem.Models.Student
+    @using DBSchoolManagementSystem.Models*@
+@using DBSchoolManagementSystem.Models
+@model IEnumerable<SubmitAssignmentVm>
+
+
+
+
+
+<h2>Submission List</h2>
+
+
+
+<table class=" table">
+    <tr>
+        <th>Student Name </th>
+        <th>Assignment Title</th>
+        <th>File</th>
+        
+
+
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+
+    {
+        <tr>
+            <td>
+                @item.FullName
+            </td>
+
+            <td>
+                @item.Title
+            </td>
+            <td>
+               <a href="@item.UploadFile" target="_blank"><img src="@item.UploadFile" href="@item.UploadFile" target="_blank" style="height: 150px;width:150px;"/></a>
+</td>
+           
+
+
+
+         
+
+
+
+
+
+
+        </tr>
+    }
+</table>
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

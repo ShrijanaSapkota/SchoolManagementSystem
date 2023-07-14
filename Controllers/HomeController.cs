@@ -18,9 +18,11 @@ namespace DBSchoolManagementSystem.Controllers
         StudentServices _SS = new StudentServices();
         public ActionResult Index()
         {
-           ViewBag.message = db.Assignment.ToList();
+
 
             return View();
+
+            
            
         }
         public ActionResult Create()

@@ -1,6 +1,9 @@
 ﻿@using DBSchoolManagementSystem.Models
-@model IEnumerable<Assignment>
+@model SubmitAssignmentVm
 
+@{ 
+    var assignment = ViewBag.assignment as Assignment;
+}
 
 @{
     ViewBag.Title = "ViewAssignment";
@@ -8,17 +11,23 @@
 
 <h2>ViewAssignment</h2>
 <div>
-    @foreach (var m in Model)
-    {
+   
 
-        @Html.ActionLink("Assignment", "Assignment", new { id = m.AssignmentId })       
-        {
-        <div>
-    <span>@m.Title</span>
-    <span>@m.Description</span>
-    <span>@m.DueDate</span>
+            <div>
+                <span>@assignment.Title</span>
+                <span>@assignment.Description</span>
+                <span>@assignment.DueDate</span>
+                <form method="post" enctype="multipart/form-data" action="/Student/SubmitAssignmentTo">
+                    <input type="hidden" name="AssignmentId" value="@assignment.AssignmentId" />
+                    <input type="file" name="FileUrl" />
+                    <input type="submit" value="Submit" />
+                </form>
+
+            </div>
+        
+    
 </div>
-        }
-    }
-</div>
+
+
+
 

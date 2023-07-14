@@ -120,12 +120,21 @@ namespace DBSchoolManagementSystem.Controllers
         }
         [HttpPost]
 
-        public ActionResult AssignInstructor(AssignInstructor model)
+        public ActionResult AssignInstructor(AssignInstructorVm a)
         {
-            
+            if (a == null)
+            {
+                return View();
+            }
+
+
             if (ModelState.IsValid)
             {
-                db.AssignInstructor.Add(model);
+                var assigninstructor = new AssignInstructor();
+                assigninstructor.Instructorid = a.Instructorid;
+                assigninstructor.DepartmentId = a.DepartmentId;
+                assigninstructor.Courseid = a.Courseid;
+                db.AssignInstructor.Add(assigninstructor);
                 db.SaveChanges();
                 return RedirectToAction("AssignIndex");
             }
@@ -133,12 +142,15 @@ namespace DBSchoolManagementSystem.Controllers
             return View();
         }
         public ActionResult AssignIndex()
+
         {
-
-
-
-
             var assigninstructor = _SS.GetAssignInstructorList();
+            if (assigninstructor != null)
+            {
+                return View(assigninstructor);
+            }
+
+         
             return View(assigninstructor);
 
         }

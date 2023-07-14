@@ -1,32 +1,18 @@
 ﻿@using DBSchoolManagementSystem.Models
-@{ 
-    var message = ViewBag.message as List<Assignment>;
-}
+
 
 @{
     ViewBag.Title = "Home Page";
 }
 
-@*<div class="jumbotron">*@
+<div class="jumbotron">
 <div class="text-center">
 
     <img width="1000" height="600" src="~/Image/schoolmgmt.png" alt="schoolmgmtimg" />
 
     <p class="lead"><center>Welcome to our School</center></p>
-    @foreach(var m in message)
-            {
-      
-            <a href="/Student/ViewAssignment/@m.AssignmentId">
-            <div>
-                <span>@m.Title</span>
-                <span>@m.Description</span>
-                <span>@m.DueDate</span>
 
-            </div>
-       
-               </a>
-
-            }
+   
 
 </div>
 

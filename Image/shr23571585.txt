@@ -1,4 +1,3 @@
-﻿ 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
@@ -45,14 +44,11 @@
                     {
                         <a class="collapse-item" href="~/Student/Create">Create Student</a>
                     }
-
-
                 </div>
             </div>
         </li>
     }
-
-    @if (!User.IsInRole("Instructor"))
+    @if (User.IsInRole("Admin"))
     {
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstructor"
@@ -63,17 +59,8 @@
             <div id="collapseInstructor" class="collapse" aria-labelledby="headingInstructor" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Instructor Details:</h6>
-
-
                     <a class="collapse-item" href="~/Instructor/Index">InstructorList</a>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a class="collapse-item" href="~/Instructor/Create">Create Instructor</a>
-                        <a class="collapse-item" href="~/Course/AssignIndex">Assign Instructor</a>
-                        <a class="collapse-item" href="~/AssignStudent/create">Assign Student</a>
-
-                    }
-
+                    <a class="collapse-item" href="~/Instructor/Create">Create Instructor</a>
                 </div>
             </div>
         </li>
@@ -91,12 +78,7 @@
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Department Details:</h6>
-
-
                     <a class="collapse-item" href="~/Department/Index">DepartmentList</a>
-
-
-
                     @if (User.IsInRole("Admin"))
                     {
                         <a class="collapse-item" href="~/Department/Create">Create Department</a>
@@ -105,106 +87,36 @@
             </div>
         </li>
     }
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourse"
+               aria-expanded="true" aria-controls="collapseCourse">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Courses</span>
+            </a>
+            <div id="collapseCourse" class="collapse" aria-labelledby="headingCourse"
+                 data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Course Details:</h6>
+                    <a class="collapse-item" href="~/Course/Index">CourseList</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
+                    {
+                        <a class="collapse-item" href="~/Course/Create">Create Course</a>
+                    }
 
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourse"
-           aria-expanded="true" aria-controls="collapseCourse">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Courses</span>
-        </a>
-        <div id="collapseCourse" class="collapse" aria-labelledby="headingCourse"
-             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Course Details:</h6>
-                <a class="collapse-item" href="~/Course/Index">CourseList</a>
-                @if (User.IsInRole("Admin") || User.IsInRole("Instructor"))
-                {
-                    <a class="collapse-item" href="~/Course/Create">Create Course</a>
-                }
-
+                </div>
             </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-    </li>
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLeaveNote"
-           aria-expanded="true" aria-controls="collapseLeaveNote">
-            <i class="fas fa-fw fa-user-graduate"></i>
-            <span>Leave Note</span>
-        </a>
-
-        <div id="collapseLeaveNote" class="collapse" aria-labelledby="headingLeaveNote" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">LeaveNote</h6>
-
-                @if (!User.IsInRole("Student"))
-
-                {
-                    <a class="collapse-item" href="~/Student/SubmitLeaveNote">Create LeaveNote</a>
-                }
+        <!-- Sidebar Message -->
 
 
-
-                <a class="collapse-item" href="~/Instructor/ViewLeaveNotes"> View Leave Note</a>
-
-
-
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAssignment"
-           aria-expanded="true" aria-controls="collapseAssignment">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Assignment</span>
-        </a>
-        <div id="collapseAssignment" class="collapse" aria-labelledby="headingAssignment"
-             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Assignment Details:</h6>
-                @if (User.IsInRole("Instructor"))
-                {
-
-
-                    <a class="collapse-item" href="~/Instructor/CreateAssignment">Create Assignment</a>
-                    <a class="collapse-item" href="~/Student/Submit">AssignmentSubmission List</a>
-
-                }
-
-                @if (!User.IsInRole("Instructor")|| User.IsInRole("Admin"))
-                {
-                    <a class="collapse-item" href="~/Student/Assignment">View Assignment</a>
-
-                }
-
-            </div>
-        </div>
-    </li>
-   
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
-
-    <!-- Sidebar Message -->
-
-
-</ul>
-
-
-<style>
-   body{
-       padding:0;
-   }
-</style>
-
-
-
-
-
+    </ul>

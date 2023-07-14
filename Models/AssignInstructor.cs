@@ -12,7 +12,7 @@ namespace DBSchoolManagementSystem.Models
         [Key]
 		public int Id { get; set; }
       
-		public int InstructorId { get; set; }
+		public int Instructorid { get; set; }
         
 		public int Courseid { get; set; }
         
@@ -25,7 +25,11 @@ namespace DBSchoolManagementSystem.Models
     }
     public class AssignInstructorVm
     {
+
         public int Courseid { get; set; }
+
+        public int Instructorid { get; set; }
+        public int DepartmentId { get; set; }
 
 
         public string CourseName { get; set; }

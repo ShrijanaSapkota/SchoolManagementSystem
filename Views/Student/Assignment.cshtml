@@ -1,0 +1,71 @@
+﻿@using DBSchoolManagementSystem.Models
+@model List<Assignment>
+@{
+    var message = ViewBag.message as List<Assignment>;
+}
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<div>
+
+    @foreach (var m in message)
+    {
+
+        <a href="/Student/ViewAssignment/@m.AssignmentId">
+            <div>
+                <span>@m.Title</span>
+                <span>@m.Description</span>
+                <span>@m.DueDate</span>
+
+            </div>
+
+        </a>
+
+    }
+
+</div>
+
+
+<style>
+    /* Global styles */
+
+
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+
+
+
+    span {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+        span:first-child {
+            font-weight: bold;
+        }
+
+
+
+    a {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+

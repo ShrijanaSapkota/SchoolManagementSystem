@@ -125,12 +125,12 @@ namespace DBSchoolManagementSystem.Services
             }
         }
 
-       public List<leaveNote> GetLeaveNoteList()
+       public List<leaveNoteVm> GetLeaveNoteList()
         {
             using (SchoolManagement  db= new SchoolManagement())
                     {
-                List<leaveNote> leaveNotes = new List<leaveNote>();
-                leaveNotes = db.Database.SqlQuery<leaveNote>("exec ListLeaveNote").ToList();
+                List<leaveNoteVm> leaveNotes = new List<leaveNoteVm>();
+                leaveNotes = db.Database.SqlQuery<leaveNoteVm>("exec ListLeaveNote").ToList();
                 return leaveNotes;
             }
            
@@ -141,7 +141,7 @@ namespace DBSchoolManagementSystem.Services
             using(SchoolManagement db =new SchoolManagement())
             {
                 List<AssignInstructorVm> assignInstructors = new List<AssignInstructorVm>();
-                assignInstructors = db.Database.SqlQuery<AssignInstructorVm>("EXEC AssignInstructorList").ToList();
+                assignInstructors = db.Database.SqlQuery<AssignInstructorVm>("exec AssignInstructorList").ToList();
                 return assignInstructors;
             }
 
@@ -167,7 +167,18 @@ namespace DBSchoolManagementSystem.Services
             }
 
         }
-      
+
+        public List<SubmitAssignmentVm> GetSubmitList()
+        {
+            using (SchoolManagement db = new SchoolManagement())
+            {
+                List<SubmitAssignmentVm> message = new List<SubmitAssignmentVm>();
+                message = db.Database.SqlQuery<SubmitAssignmentVm>("exec SubmitList").ToList();
+                return message;
+            }
+
+        }
+
 
 
 

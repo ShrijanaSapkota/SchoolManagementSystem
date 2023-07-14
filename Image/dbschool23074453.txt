@@ -1,0 +1,615 @@
+USE [DBSchool]
+GO
+/****** Object:  User [##MS_PolicyTsqlExecutionLogin##]    Script Date: 7/10/2023 12:00:29 PM ******/
+CREATE USER [##MS_PolicyTsqlExecutionLogin##] FOR LOGIN [##MS_PolicyTsqlExecutionLogin##] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__MigrationHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ContextKey] [nvarchar](300) NOT NULL,
+	[Model] [varbinary](max) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC,
+	[ContextKey] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetRoles](
+	[Id] [nvarchar](128) NOT NULL,
+	[Name] [nvarchar](256) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserClaims](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](128) NOT NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserLogins](
+	[LoginProvider] [nvarchar](128) NOT NULL,
+	[ProviderKey] [nvarchar](128) NOT NULL,
+	[UserId] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED 
+(
+	[LoginProvider] ASC,
+	[ProviderKey] ASC,
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserRoles](
+	[UserId] [nvarchar](128) NOT NULL,
+	[RoleId] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUsers](
+	[Id] [nvarchar](128) NOT NULL,
+	[Email] [nvarchar](256) NULL,
+	[EmailConfirmed] [bit] NOT NULL,
+	[PasswordHash] [nvarchar](max) NULL,
+	[SecurityStamp] [nvarchar](max) NULL,
+	[PhoneNumber] [nvarchar](max) NULL,
+	[PhoneNumberConfirmed] [bit] NOT NULL,
+	[TwoFactorEnabled] [bit] NOT NULL,
+	[LockoutEndDateUtc] [datetime] NULL,
+	[LockoutEnabled] [bit] NOT NULL,
+	[AccessFailedCount] [int] NOT NULL,
+	[UserName] [nvarchar](256) NOT NULL,
+	[UserId] [int] NULL,
+	[UserStatus] [varchar](50) NULL,
+ CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AssignInstructor]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AssignInstructor](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Courseid] [int] NOT NULL,
+	[DepartmentId] [int] NOT NULL,
+	[InstructorId] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Assignment]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Assignment](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](50) NOT NULL,
+	[Description] [nvarchar](50) NOT NULL,
+	[DueDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Assignment] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Course]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Course](
+	[Courseid] [int] IDENTITY(1,1) NOT NULL,
+	[CourseName] [nvarchar](50) NOT NULL,
+	[DepartmentId] [int] NOT NULL,
+	[SemesterId] [int] NOT NULL,
+ CONSTRAINT [PK_Course_1] PRIMARY KEY CLUSTERED 
+(
+	[Courseid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CourseType]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CourseType](
+	[TypeId] [int] IDENTITY(1,1) NOT NULL,
+	[TypeName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_CourseType] PRIMARY KEY CLUSTERED 
+(
+	[TypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Department]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Department](
+	[DepartmentId] [int] IDENTITY(1,1) NOT NULL,
+	[DepartmenttName] [nvarchar](50) NOT NULL,
+	[InstructorId] [int] NULL,
+ CONSTRAINT [PK_Department] PRIMARY KEY CLUSTERED 
+(
+	[DepartmentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmployeeType]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeeType](
+	[TypeId] [int] IDENTITY(1,1) NOT NULL,
+	[TypeName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_EmployeeType] PRIMARY KEY CLUSTERED 
+(
+	[TypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Instructor]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Instructor](
+	[Instructorid] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[Courses] [nvarchar](50) NOT NULL,
+	[TypeId] [int] NULL,
+	[DepartmentId] [int] NULL,
+	[Courseid] [int] NULL,
+ CONSTRAINT [PK_Instructor] PRIMARY KEY CLUSTERED 
+(
+	[Instructorid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LeaveNote]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LeaveNote](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[StudentId] [int] NOT NULL,
+	[InstructorId] [int] NOT NULL,
+	[Note] [nvarchar](200) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[IsApproved] [bit] NOT NULL,
+	[IsRejected] [bit] NOT NULL,
+ CONSTRAINT [PK_LeaveNote] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Semester]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Semester](
+	[SemesterId] [int] IDENTITY(1,1) NOT NULL,
+	[SemesterName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Semester] PRIMARY KEY CLUSTERED 
+(
+	[SemesterId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Student]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Student](
+	[StudentId] [int] IDENTITY(1,1) NOT NULL,
+	[FullName] [nvarchar](50) NOT NULL,
+	[Address] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[Contactno] [nvarchar](50) NOT NULL,
+	[Gender] [nvarchar](50) NOT NULL,
+	[EnrollmentDate] [datetime] NOT NULL,
+	[TypeId] [int] NULL,
+	[Studentimg] [nvarchar](550) NULL,
+	[SubjectId] [int] NULL,
+	[UserId] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
+(
+	[StudentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StudentSubject]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StudentSubject](
+	[SSID] [int] IDENTITY(1,1) NOT NULL,
+	[StudentId] [int] NOT NULL,
+	[SubjectId] [int] NOT NULL,
+ CONSTRAINT [PK_StudentSubject] PRIMARY KEY CLUSTERED 
+(
+	[SSID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Subject]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Subject](
+	[SubjectId] [int] IDENTITY(1,1) NOT NULL,
+	[SubjectName] [nvarchar](50) NOT NULL,
+	[InstructorId] [int] NULL,
+	[CourseId] [int] NULL,
+	[SemesterId] [int] NULL,
+	[DepartmentId] [int] NULL,
+ CONSTRAINT [PK_Subject] PRIMARY KEY CLUSTERED 
+(
+	[SubjectId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserType]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserType](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_UserType] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[AssignInstructor] ADD  CONSTRAINT [DF_AssignInstructor_Courseid]  DEFAULT ((0)) FOR [Courseid]
+GO
+ALTER TABLE [dbo].[AssignInstructor] ADD  CONSTRAINT [DF_AssignInstructor_DepartmentId]  DEFAULT ((0)) FOR [DepartmentId]
+GO
+ALTER TABLE [dbo].[AssignInstructor] ADD  CONSTRAINT [DF_AssignInstructor_InstructorId]  DEFAULT ((0)) FOR [InstructorId]
+GO
+ALTER TABLE [dbo].[Course] ADD  CONSTRAINT [DF_Course_DepartmentId]  DEFAULT ((0)) FOR [DepartmentId]
+GO
+ALTER TABLE [dbo].[Course] ADD  CONSTRAINT [DF_Course_SemesterId]  DEFAULT ((0)) FOR [SemesterId]
+GO
+ALTER TABLE [dbo].[LeaveNote] ADD  CONSTRAINT [DF_LeaveNote_IsApproved]  DEFAULT ((0)) FOR [IsApproved]
+GO
+ALTER TABLE [dbo].[LeaveNote] ADD  CONSTRAINT [DF_LeaveNote_IsRejected]  DEFAULT ((0)) FOR [IsRejected]
+GO
+ALTER TABLE [dbo].[AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserClaims] CHECK CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[AspNetUserLogins]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserLogins] CHECK CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[AspNetRoles] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId]
+GO
+ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[Instructor]  WITH CHECK ADD  CONSTRAINT [FK_Instructor_EmployeeType] FOREIGN KEY([TypeId])
+REFERENCES [dbo].[EmployeeType] ([TypeId])
+GO
+ALTER TABLE [dbo].[Instructor] CHECK CONSTRAINT [FK_Instructor_EmployeeType]
+GO
+/****** Object:  StoredProcedure [dbo].[DeleteStudent]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[DeleteStudent]
+(
+    @StudentId int,
+    @Message varchar(50) OUTPUT
+)
+AS 
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        BEGIN
+            DELETE FROM Student
+            WHERE StudentId = @StudentId;
+
+            SET @Message = 'Deleted Successfully';
+        END
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        SET @Message = ERROR_MESSAGE();
+        THROW;
+    END CATCH;  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetLeaveNote]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetLeaveNote]
+   AS
+BEGIN
+    SELECT L.Id, L.Note, S.FullName, I.FirstName
+    FROM LeaveNote	L
+    JOIN Student S ON L.StudentId = S.StudentId
+    JOIN Instructor I ON L.InstructorId = I.Instructorid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertStudent]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertStudent]
+(
+@FullName nvarchar(50),
+@Address nvarchar(50),
+@Email nvarchar(50),
+@Contactno nvarchar(50),
+@Gender nvarchar(50),
+@EnrollmentDate datetime,
+@Message varchar(50) OUTPUT,
+@SID int OUTPUT
+)
+AS 
+BEGIN
+
+SET NOCOUNT ON;
+BEGIN TRY
+			BEGIN TRANSACTION;
+
+BEGIN
+if exists(select top 1 StudentId from Student where FullName=@FullName)
+BEGIN
+set @Message='Student Already Inserted'
+set @SID=0
+END
+ELSE
+BEGIN
+INSERT INTO Student(FullName,[Address],Email,Contactno,Gender,EnrollmentDate )
+values(@FullName,@Address,@Email,@Contactno,@Gender,@EnrollmentDate)
+
+set @SID=SCOPE_IDENTITY();
+set @Message='Saved Successfully' 
+END
+END
+       
+            COMMIT TRANSACTION;
+
+        END TRY
+        BEGIN CATCH
+            ROLLBACK TRANSACTION;
+set @Message=ERROR_MESSAGE();
+THROW;
+        END CATCH;  
+
+
+   
+END 
+GO
+/****** Object:  StoredProcedure [dbo].[ListLeaveNote]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ListLeaveNote]
+   AS
+BEGIN
+    SELECT L.Id, L.Note,L.InstructorId,L.StudentId,L.Date,L.IsApproved,L.IsRejected, S.FullName, I.FirstName
+    FROM LeaveNote	L
+    LEFT JOIN Student S ON L.StudentId = S.StudentId
+    LEFT JOIN Instructor I ON L.InstructorId = I.Instructorid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ListStudent]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[ListStudent]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT StudentId, FullName,Address, Email
+    FROM Student;
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[ListStudents]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ListStudents]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT  FullName
+    FROM Student;
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[ListUserRoles]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[ListUserRoles]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Id, Name
+    FROM AspNetRoles;
+END;
+GO
+/****** Object:  StoredProcedure [dbo].[populateInstructorlist]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE Procedure [dbo].[populateInstructorlist]
+
+as
+begin
+select FirstName,LastName,b.DepartmenttName, c.DepartmentId from Instructor a
+inner join Department b on a.DepartmentId=b.DepartmentId
+inner join Course c on a.Courseid= c.Courseid
+
+
+
+
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[PopulateSectionWiseProgramCount]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create Procedure [dbo].[PopulateSectionWiseProgramCount]
+(
+@GrantTypeId int,
+@PhaseNumber int
+)
+as
+Begin
+if(@GrantTypeId=0)
+Begin
+select MS.SectionName, count(SPM.SubProgramId) as TotalProgram From SubProgramMaster SPM
+right join MainSection MS on MS.MainSectionId=SPM.MainSectionId and SPM.Status=2 and SPM.PhaseStatus=@PhaseNumber
+group by MS.SectionName
+end
+else
+begin
+select MS.SectionName, count(SPM.SubProgramId) as TotalProgram From SubProgramMaster SPM
+right join MainSection MS on MS.MainSectionId=SPM.MainSectionId and SPM.Status=2 and SPM.PhaseStatus=@PhaseNumber
+where SPM.GrantTypeId=@GrantTypeId
+group by MS.SectionName
+
+end
+End
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateStudent]    Script Date: 7/10/2023 12:00:29 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[UpdateStudent]
+(
+
+    @StudentId int,
+    @FullName nvarchar(50),
+    @Address nvarchar(50),
+    @Email nvarchar(50),
+    @Contactno nvarchar(50),
+    @Gender nvarchar(50),
+    @EnrollmentDate datetime,
+    @Message varchar(50) OUTPUT
+)
+AS 
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+ 
+        BEGIN
+            UPDATE Student
+            SET FullName = @FullName,
+                [Address] = @Address,
+                Email = @Email,
+                Contactno = @Contactno,
+                Gender = @Gender,
+                EnrollmentDate = @EnrollmentDate
+            WHERE StudentId = @StudentId;
+
+            SET @Message = 'Updated Successfully';
+        END
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        SET @Message = ERROR_MESSAGE();
+        THROW;
+    END CATCH;  
+END
+GO
