@@ -6,25 +6,26 @@
     ViewBag.Title = "AssignIndex";
 }
 <p>
-    @Html.ActionLink("Assign Instructor", "AssignInstructor")
+    @Html.ActionLink("Assign Instructor", "AssignInstructor", null, new { @class = "btn btn-primary custom-btn" })
+  
 </p>
 
 <h2>AssignIndex</h2>
 
 <table class="table">
-    <tr>
+    <tr class="text-center bg-dark text-light">
         <th>Instructor Name</th>
         <th>Department Name</th>
         <th>Course Name</th>
-        <th>Semester Name</th>
+        
 
 
         <th>Action</th>
     </tr>
     @foreach (var item in Model)
 
-    {
-        <tr>
+        {
+        <tr class="text-center bg-light text-dark">
             <td>
                 @item.InstructorName
             </td>
@@ -37,9 +38,7 @@
 
 
 
-            <td>
-                @item.SemesterName
-            </td>
+           
 
 
 
@@ -47,51 +46,16 @@
             <td>
                 @if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Courseid }, new { style = "color: blue; margin-right: 5px;" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Courseid }, new { @class = "btn btn-primary", @style = "color:white" })
                 }
-                @Html.ActionLink("Details", "Details", new { id = item.Courseid }, new { style = "color: green; margin-right: 5px;" })
+                @Html.ActionLink("Details", "Details", new { id = item.Courseid }, new { @class = "btn btn-success", @style = "color:white" })
                 @if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Courseid }, new { style = "color: red; margin-right: 5px;" })}
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Courseid }, new { @class = "btn btn-danger", @style = "color:white" })}
             </td>
         </tr>
     }
     </table>
 
-<style>
-    .table {
-        border-collapse: collapse;
-        width: 100%;
-    }
 
-        .table th, .table td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #f2f2f2;
-            color: #333;
-            font-weight: bold;
-        }
-
-    .action-link {
-        color: #000;
-        margin-right: 5px;
-        text-decoration: none;
-    }
-
-        .action-link.edit-link {
-            color: blue;
-        }
-
-        .action-link.details-link {
-            color: green;
-        }
-
-        .action-link.delete-link {
-            color: red;
-        }
-</style>
 

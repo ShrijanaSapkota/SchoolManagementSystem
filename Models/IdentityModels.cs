@@ -17,6 +17,8 @@ namespace DBSchoolManagementSystem.Models
             return userIdentity;
         }
         public int? UserId { get; set; }
+        public int? UserTypeId { get; set; }
+        public string UserStatus { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

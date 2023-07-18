@@ -91,16 +91,26 @@ namespace DBSchoolManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Student model, HttpPostedFileBase ImageFile)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, UserTypeId = 1, UserStatus = "Active" };
             var result = await UserManager.CreateAsync(user, "User12345@@");
+            using (SchoolManagement db = new SchoolManagement())
+            {
+             if (db.Student.Any(x => x.FullName == model.FullName))
+            {
+            ModelState.AddModelError("FullName", "Name Already Exists");
+            }
+        
+
+                    
             if (result.Succeeded)
             {
                 var myuser = await UserManager.FindByEmailAsync(model.Email);
                 await UserManager.AddToRoleAsync(myuser.Id, "Student");
                 model.UserId = myuser.Id;
+                   
 
 
-                if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
+                        if (model.ImageFile != null && model.ImageFile.ContentLength > 0)
                 {
                     string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
                     string extension = Path.GetExtension(model.ImageFile.FileName);
@@ -109,31 +119,26 @@ namespace DBSchoolManagementSystem.Controllers
                     fileName = Path.Combine(Server.MapPath("~/Image"), fileName);
                     model.ImageFile.SaveAs(fileName);
                 }
-
-
-
-
-                using (SchoolManagement db = new SchoolManagement())
-                {
-                    if (db.Student.Any(x => x.FullName == model.FullName))
-                    {
-                        ModelState.AddModelError("FullName", "Name Already Exist");
-                    }
                     if (ModelState.IsValid)
                     {
-
                         db.Student.Add(model);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        myuser.UserId = model.StudentId;
+                        await UserManager.UpdateAsync(myuser);
+
                     }
-                }
-                return View(model);
-
+                        return RedirectToAction("Index");
+            
             }
-            return View();
+         }
 
-
+    return View(model);
         }
+        
+
+
+
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -305,10 +310,9 @@ namespace DBSchoolManagementSystem.Controllers
         public ActionResult SubmitLeaveNote()
         {
 
-            var viewModel = new LeaveNoteViewModel();
             ViewBag.Instructors = db.Instructor.ToList();
 
-            return View(viewModel);
+            return View();
         }
 
         [HttpPost]

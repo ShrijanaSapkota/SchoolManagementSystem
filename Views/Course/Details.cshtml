@@ -22,6 +22,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Courseid }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Courseid }, new { @class = "btn btn-primary", @style = "color:white" }) |
+    @Html.ActionLink("Back to List", "Index", new { id = Model.Courseid }, new { @class = "btn btn-secondary", @style = "color:white" })
 </p>

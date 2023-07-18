@@ -13,12 +13,12 @@
 @if (User.IsInRole("Admin"))
 {
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Add Department", "Create", null, new { @class = "btn btn-primary custom-btn" })
     </p>
 }
 
 <table class=" table">
-    <tr>
+    <tr class="text-center bg-dark text-light">
         <th>Department Id </th>
         <th>Department Name </th>
         <th>Action</th>
@@ -33,7 +33,7 @@
     @foreach (var item in Model.DepartmentList)
 
     {
-        <tr>
+        <tr class="text-center bg-light text-dark">
 
             <td>
                 @item.DepartmentId
@@ -48,11 +48,11 @@
             <td>
                 @if (User.IsInRole("Admin"))
                 {
-                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId }, new { style = "color: blue; margin-right: 5px;" })}
-                @Html.ActionLink("Details", "Details", new { id = item.DepartmentId }, new { style = "color: green; margin-right: 5px;" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId }, new { @class = "btn btn-primary", @style = "color:white" })}
+                @Html.ActionLink("Details", "Details", new { id = item.DepartmentId }, new { @class = "btn btn-success", @style = "color:white" })
                 @if (User.IsInRole("Admin"))
                 {
-                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentId }, new { style = "color: red; margin-right: 5px;" })}
+                @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentId }, new { @class = "btn btn-danger", @style = "color:white" })}
             </td>
         </tr>
 

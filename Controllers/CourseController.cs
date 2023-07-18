@@ -157,12 +157,22 @@ namespace DBSchoolManagementSystem.Controllers
 
         [HttpGet]
         [Route("get/CourseunderDepartment")]
-        public JsonResult CourseunderDepartment(int Courseid)
+        public JsonResult CourseunderDepartment(int departmentId)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            List<Course>CourseList =db.Course.Where(x => x.Courseid == Courseid).ToList();
+            List<Course> courseList = db.Course.Where(x => x.DepartmentId == departmentId).ToList();
 
-            return Json(CourseList,JsonRequestBehavior.AllowGet);
+            return Json(courseList, JsonRequestBehavior.AllowGet);
         }
+
+        //[HttpGet]
+        //[Route("get/CourseunderDepartment")]
+        //public JsonResult CourseunderDepartment(int Courseid)
+        //{
+        //    db.Configuration.ProxyCreationEnabled = false;
+        //    List<Course>CourseList =db.Course.Where(x => x.Courseid == Courseid).ToList();
+
+        //    return Json(CourseList,JsonRequestBehavior.AllowGet);
+        //}
     }    
 }

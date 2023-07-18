@@ -1,4 +1,64 @@
-﻿@using DBSchoolManagementSystem.Models
+﻿@*@using DBSchoolManagementSystem.Models
+    @model List<Assignment>
+    @{
+        var message = ViewBag.message as List<Assignment>;
+    }
+
+    @{
+        ViewBag.Title = "Home Page";
+    }
+    <div>
+
+        @foreach (var m in message)
+        {
+
+            <a href="/Student/ViewAssignment/@m.AssignmentId">
+                <div>
+                    <span>@m.Title</span>
+                    <span>@m.Description</span>
+                    <span>@m.DueDate</span>
+
+                </div>
+
+            </a>
+
+        }
+
+    </div>
+
+
+    <style>
+        /* Global styles */
+
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+
+
+
+        span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+            span:first-child {
+                font-weight: bold;
+            }
+
+
+
+        a {
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+        }
+    </style>*@
+
+@using DBSchoolManagementSystem.Models
 @model List<Assignment>
 @{
     var message = ViewBag.message as List<Assignment>;
@@ -7,29 +67,12 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<div>
-
-    @foreach (var m in message)
-    {
-
-        <a href="/Student/ViewAssignment/@m.AssignmentId">
-            <div>
-                <span>@m.Title</span>
-                <span>@m.Description</span>
-                <span>@m.DueDate</span>
-
-            </div>
-
-        </a>
-
-    }
-
-</div>
-
 
 <style>
     /* Global styles */
-
+    body {
+        font-family: Arial, sans-serif;
+    }
 
     h2 {
         font-size: 24px;
@@ -37,26 +80,58 @@
         margin-bottom: 20px;
     }
 
+    .assignment-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }
 
-
-
-    span {
-        display: block;
+    .assignment-title {
+        font-size: 18px;
+        font-weight: bold;
         margin-bottom: 5px;
     }
 
-        span:first-child {
-            font-weight: bold;
-        }
+    .assignment-description {
+        margin-bottom: 5px;
+        color: #555;
+    }
 
-
+    .assignment-due-date {
+        color: #888;
+    }
 
     a {
+        display: block;
         padding: 8px;
         margin-bottom: 8px;
+        text-decoration: none;
+        
+        color: black;
+        border-radius: 4px;
     }
-    }
+
+      /*  a:hover {
+            background-color: #0056b3;
+        }*/
 </style>
+
+<h2>Home Page</h2>
+<div>
+    @foreach (var m in message)
+    {
+        <a href="/Student/ViewAssignment/@m.AssignmentId">
+            <div class="assignment-container">
+                <span class="assignment-title">@m.Title</span>
+                <div class="assignment-description">
+                    <span>@m.Description</span>
+                </div>
+                <span class="assignment-due-date">@m.DueDate</span>
+            </div>
+        </a>
+    }
+</div>
 
 
 

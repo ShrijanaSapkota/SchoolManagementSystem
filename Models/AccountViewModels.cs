@@ -80,10 +80,12 @@ namespace DBSchoolManagementSystem.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        [Display(Name ="User")]
+        [Display(Name = "User")]
         public int? UserId { get; set; }
         [NotMapped]
-        public string RoleId { get; set;}
+        public string RoleId { get; set; }
+        [NotMapped]
+
     }
 
     public class ResetPasswordViewModel

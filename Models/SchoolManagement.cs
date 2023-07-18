@@ -27,6 +27,8 @@ namespace DBSchoolManagementSystem.Models
         public DbSet<AssignInstructor> AssignInstructor { get; set; }
         public DbSet<SubmitAssignment> SubmitAssignment { get; set; }
 
+        public DbSet<HomePageModel> HomePageModel { get; set; }
+
 
 
         //public object StudentSubjectList { get;  set; }

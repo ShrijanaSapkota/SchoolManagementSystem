@@ -79,7 +79,7 @@ namespace DBSchoolManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Instructor model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email ,UserStatus="Inactive",UserTypeId=2};
             var result = await UserManager.CreateAsync(user, "Instructor@12345");
             if (result.Succeeded)
             {
@@ -91,12 +91,14 @@ namespace DBSchoolManagementSystem.Controllers
                 {
                     db.Instructor.Add(model);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    myuser.UserId = model.Instructorid;
+                    await UserManager.UpdateAsync(myuser);
+                   
                 }
 
-                return View(model);
+                return RedirectToAction("Index");
             }
-            return View();
+            return View(model);
         }
 
         public ActionResult Edit(int id)

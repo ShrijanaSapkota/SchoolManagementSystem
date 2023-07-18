@@ -1,7 +1,9 @@
-﻿@using DBSchoolManagementSystem.Models
+﻿
+
+@using DBSchoolManagementSystem.Models
 @model SubmitAssignmentVm
 
-@{ 
+@{
     var assignment = ViewBag.assignment as Assignment;
 }
 
@@ -9,23 +11,51 @@
     ViewBag.Title = "ViewAssignment";
 }
 
-<h2>ViewAssignment</h2>
-<div>
-   
+<style>
+    h2 {
+        color: #333;
+    }
 
-            <div>
-                <span>@assignment.Title</span>
-                <span>@assignment.Description</span>
-                <span>@assignment.DueDate</span>
-                <form method="post" enctype="multipart/form-data" action="/Student/SubmitAssignmentTo">
-                    <input type="hidden" name="AssignmentId" value="@assignment.AssignmentId" />
-                    <input type="file" name="FileUrl" />
-                    <input type="submit" value="Submit" />
-                </form>
+    .assignment-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-            </div>
-        
+    .assignment-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .assignment-description {
+        margin-bottom: 10px;
+    }
+
+    .assignment-details {
+        margin-bottom: 20px;
+    }
+
+    .submit-form {
+        margin-top: 20px;
+    }
+</style>
+
+<h2>View Assignment</h2>
+<div class="assignment-container">
+    <div class="assignment-details">
+        <h4 class="assignment-title">@assignment.Title</h4>
+        <p class="assignment-description">@assignment.Description</p>
+
+    </div>
     
+
+    <form method="post" enctype="multipart/form-data" action="/Student/SubmitAssignmentTo" class="submit-form">
+        <input type="hidden" name="AssignmentId" value="@assignment.AssignmentId" />
+        <input type="file" name="FileUrl" /><br>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
+    <p>@assignment.DueDate</p>
 </div>
 
 

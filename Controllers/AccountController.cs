@@ -82,7 +82,9 @@ namespace DBSchoolManagementSystem.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    var user = UserManager.FindByName(model.Email); 
+                    var user = UserManager.FindByName(model.Email);
+                    user.UserStatus = "Active";
+                    await UserManager.UpdateAsync(user);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

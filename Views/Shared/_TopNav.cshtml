@@ -4,8 +4,14 @@
     
     
     <div class="navbar">
+        <form action="@Url.Action("Search", "Home")" method="get">
+            <input type="text" name="searchQuery" placeholder="Search..." />
+            <input type="submit" value="Search" />
+        </form>
 
         <ul class="navbar-nav ml-auto">
+
+
 
             <li class="nav-item">
                 <a class="nav-link" href="~/Home/Index">Home</a>
@@ -16,6 +22,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="~/Home/Contact">Contact</a>
             </li>
+
+
 
 
             <li class="nav-item dropdown no-arrow">
@@ -49,6 +57,32 @@
    
 
 </ul>
+
+<style>
+    .navbar {
+        display: flex;
+        align-items: center;
+    }
+
+        .navbar form {
+            margin-right: auto;
+            padding-right:800px;
+        }
+
+            .navbar form input[type="submit"] {
+                margin-left: 10px;
+            }
+
+            .navbar form input[type="text"] {
+                width: 500px;
+                padding: 2px;
+               
+                
+                border-radius: 2px;
+            }
+
+</style>
+
 
 
 

@@ -14,13 +14,23 @@ namespace DBSchoolManagementSystem.Controllers
     
     public class HomeController : Controller  
     {
+        
         SchoolManagement db = new SchoolManagement();
         StudentServices _SS = new StudentServices();
         public ActionResult Index()
         {
+            HomePageModel model = new HomePageModel();
+
+            // Retrieve the count values from your data source
+            model.InstructorCount = db.Instructor.Count();
+            model.StudentCount = db.Student.Count();
+            model.CourseCount = db.Course.Count();
+            model.DepartmentCount = db.Department.Count();
+
+            return View(model);
 
 
-            return View();
+            
 
             
            
@@ -63,7 +73,27 @@ namespace DBSchoolManagementSystem.Controllers
         {
             return View();
         }
+        public ActionResult Search(string searchQuery)
+        {
+            ViewBag.StudentList = db.Student.ToList();
+            ViewBag.Instructor = db.Instructor.ToList();
+            
 
+            var Student = db.Student.Where(x => x.FullName.Contains(searchQuery)).ToList();
+            var Instructor = db.Instructor.Where(x => x.FirstName.Contains(searchQuery)).ToList();
+            ViewBag.Instructors = Instructor;
+            ViewBag.Students = Student;
 
+            var model = new SearchViewModel();
+
+            
+            
+            return View(model);
+
+            return RedirectToAction("Index");
+        }
     }
+
+
 }
+

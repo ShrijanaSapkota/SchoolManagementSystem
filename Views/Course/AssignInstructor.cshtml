@@ -9,7 +9,7 @@
     ViewBag.Title = "AssignInstructor";
 }
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <h2>AssignInstructor</h2>
 <form method="post" action="/Course/AssignInstructor">
     <div>
@@ -95,55 +95,47 @@
         border-color: #ccc;
     }
 </style>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
+   
 
-<script>
-    //$(document).ready(function () {
-    //    $("select.department").change(function () {
-    //        debugger;
-    //        var DepartmentId = $(this).val();
-
-    //        // Make an AJAX request to fetch the subcategories based on the selected category
-    //        $.ajax({
-    //            url: "/get/CourseunderDepartment",
-    //            method: "POST",
-    //            data: { Id: DepartmentId },
-    //            dataType: "json",
-    //            success: function (response) {
-    //                // Clear the existing options in the subcategory select tag
-    //                $(".Course").empty();
-
-    //                // Add the new options based on the response data
-    //                if (response.length > 0) {
-    //                    response.forEach(function (data) {
-    //                        $(".Course").append('<option value="' + data.Id + '">' + data.name + '</option>');
-    //                    });
-    //                } else {
-    //                    $(".Course").append('<option value="">No course available</option>');
-    //                }
-    //            },
-    //            error: function () {
-    //                console.log("Error occurred during AJAX request");
-    //            }
-    //        });
-    //    });
-    //});
-
-
-</script>
-<script>
+    <script>
     $(document).ready(function () {
-        $("#DepartmentId").change(function () {
-            $.get("/Course/CourseunderDepartment"{ DepartmentId: $("#DepartmentId").val() }, function (data) {
-                $("#Courseid").empty();
-                $.each(data, function (index, row) {
-                    $("#Courseid").append("<option value='" + row.Courseid + "'>" + row.CourseName + "</option>")
-                });
+        // Handler for the department select change event
+        $("select.department").change(function () {
+            var departmentId = $(this).val();
+            var courseDropdown = $("select.Course");
+
+            // Make an AJAX request to fetch the courses based on the selected department
+            $.ajax({
+                url: "@Url.Action("GetCourseByDepartmentIdDD", "Helpers", new { @area = "" })",
+                data: { id: departmentId },
+                dataType: "json",
+                type: "POST",
+                error: function () {
+                    console.log("An error occurred during AJAX request");
+                },
+                success: function (data) {
+                    courseDropdown.empty();
+                    var items = "";
+
+                    // Add the new options based on the response data
+                    if (data.length > 0) {
+                        $.each(data, function (i, item) {
+                            items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
+                        });
+                    } else {
+                        items = '<option value="">No course available</option>';
+                    }
+
+                    courseDropdown.html(items);
+                }
             });
         });
-    });5
+    });
+    </script>
 
 
-</script>
 
 

@@ -1,27 +1,120 @@
-﻿@using DBSchoolManagementSystem.Models
+﻿@*@using DBSchoolManagementSystem.Models
 
 
-@{
-    ViewBag.Title = "Home Page";
-}
+    @{
+        ViewBag.Title = "Home Page";
+    }
 
-<div class="jumbotron">
-<div class="text-center">
+    <div class="jumbotron">
+    <div class="text-center">
 
-    <img width="1000" height="600" src="~/Image/schoolmgmt.png" alt="schoolmgmtimg" />
+        <img width="1000" height="600" src="~/Image/schoolmgmt.png" alt="schoolmgmtimg" />
 
-    <p class="lead"><center>Welcome to our School</center></p>
+        <p class="lead"><center>Welcome to our School</center></p>
 
-   
 
+
+    </div>*@
+
+@*@using DBSchoolManagementSystem.Models
+
+    @model HomePageModel
+
+    <h2>Welcome to the Homepage</h2>
+
+    <p>Instructors: @Model.InstructorCount</p>
+    <p>Students: @Model.StudentCount</p>
+    <p>Courses: @Model.CourseCount</p>
+    <p>Departments: @Model.DepartmentCount</p>*@
+
+@using DBSchoolManagementSystem.Models
+
+@model HomePageModel
+
+<style>
+    .count-box {
+        display: inline-block;
+        width: 300px;
+        height: 200px;
+        background-color: #f2f2f2;
+        padding: 50px;
+        border-radius: 10px;
+        margin-top: 50px;
+        margin-left:10px;
+        text-align: center;
+        text-decoration: none;
+        color: #333;
+        transition: background-color 0.3s ease;
+    }
+
+        .count-box:hover {
+            background-color: #dcdcdc;
+        }
+
+        .count-box p {
+            margin: 0;
+            font-size: 24px;
+            color:black;
+        }
+
+    .instructor-box {
+        background-color: #FFD700; /* Yellow */
+    }
+
+    .student-box {
+        background-color: #32CD32; /* Green */
+    }
+
+    .course-box {
+        background-color: #4169E1; /* Blue */
+    }
+
+    .department-box {
+        background-color: #FF4500; /* Orange */
+    }
+    h2 {
+        font-size: 30px;
+        color: #333;
+        text-align: center;
+        margin: 0; /* Remove default margin to avoid unwanted spacing */
+    }
+</style>
+
+<h2>Welcome to Bhaktapur Multiple Campus</h2>
+
+<div class="count-box instructor-box">
+    <a href="@Url.Action("Index", "Instructor")" class="count-box-link">
+        <p>Instructors</p>
+        <p>@Model.InstructorCount</p>
+    </a>
+</div>
+
+<div class="count-box student-box">
+    <a href="@Url.Action("Index", "Student")" class="count-box-link">
+        <p>Students</p>
+        <p>@Model.StudentCount</p>
+    </a>
+</div>
+
+<div class="count-box course-box">
+    <a href="@Url.Action("Index", "Course")" class="count-box-link">
+        <p>Courses</p>
+        <p>@Model.CourseCount</p>
+    </a>
+</div>
+
+<div class="count-box department-box">
+    <a href="@Url.Action("Index", "Department")" class="count-box-link">
+        <p>Departments</p>
+        <p>@Model.DepartmentCount</p>
+    </a>
 </div>
 
 
 
 
- 
 
-    
-    
+
+
 
 

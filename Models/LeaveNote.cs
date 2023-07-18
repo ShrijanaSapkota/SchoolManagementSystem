@@ -45,6 +45,9 @@ namespace DBSchoolManagementSystem.Models
         public string FullName { get; set; }    
 
         public string FirstName { get; set; }
+        public bool IsApproved { get; set; }
+
+        public bool IsRejected { get; set; }
 
         public string Note { get; set; }  
         public DateTime Date { get; set; }
