@@ -43,7 +43,6 @@ namespace DBSchoolManagementSystem.Models
 
    
 
-        public string SemesterName { get; set; }
 
     }
 }
